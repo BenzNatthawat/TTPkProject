@@ -10,18 +10,19 @@
 
     <title>@yield('title')</title>
     <!-- icon title -->
-    <link rel="icon" href="/images/logotitle.png" type="image/png" sizes="16x16">
+    <link rel="icon" href="../images/logotitle.png" type="image/png" sizes="16x16">
     <!-- Custom styles for this template -->
-    <link href="css/timepicki.css" rel="stylesheet">
+    <link href="../css/timepicki.css" rel="stylesheet">
     
     <link rel="stylesheet" href="/css/styles.css" />
-    <link rel="stylesheet" href="/css/theme-turqoise.css" id="template-color" />
+    <link rel="stylesheet" href="../css/theme-turqoise.css" id="template-color" />
+    <link rel="stylesheet" type="text/css" href="../css/alert.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightslider/1.1.6/css/lightslider.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800|Roboto+Slab:400,700&subset=latin,latin-ext,greek-ext,greek,cyrillic,vietnamese,cyrillic-ext">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="https://use.fontawesome.com/e808bf9397.js"></script>
-    <link rel="shortcut icon" href="images/favicon.ico" />
-    <link rel="stylesheet" href="/css/styler.css" type="text/css" />
+    <link rel="shortcut icon" href="../images/favicon.ico" />
+    <link rel="stylesheet" href="../css/styler.css" type="text/css" />
      <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -82,6 +83,7 @@
                             <ul style="display: none;">
                                 <li><a href="/account">My Account</a></li>
                                 <li><a href="/booking">Open Booking</a></li>
+                                <li><a href="/positions">position</a></li>
                                 <li><a href="#">Setting</a></li>
                                 <li><a href="{{ route('logout') }}" 
                                     onclick="event.preventDefault();

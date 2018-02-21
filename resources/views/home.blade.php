@@ -28,11 +28,11 @@
                     <h5><span>01</span> What?</h5>
                     <div class="row" style="margin-left: 10px">
                         <div class="f-item one-full">
-                            <input type="radio" name="radio" id="driver" value="form1" />
+                            <input type="radio" name="radio" id="driver" value="form1" checked required />
                             <label for="hotel">Shuttles</label>
                         </div>
                         <div class="f-item one-full">
-                            <input type="radio" name="radio" id="rent_a_car" value="form3" />
+                            <input type="radio" name="radio" id="rent_a_car" value="form3" required/>
                             <label for="rent_a_car">Rent a Car</label>
                         </div>
                     </div>
@@ -48,11 +48,11 @@
                             <div class="row">
                                 <div class="f-item full-width">
                                     <label for="destination7">Pick Up</label>
-                                    <input type="text" placeholder="Where the place that pick up you." id="destination7" name="pick_up" />
+                                    <input type="text" placeholder="Where the place that pick up you." id="destination7" name="pick_up" required/>
                                 </div>
                                 <div class="f-item full-width">
                                     <label for="destination8">Drop Off</label>
-                                    <input type="text" placeholder="Where the place that drop off you." id="destination8" name="drop_off" />
+                                    <input type="text" placeholder="Where the place that drop off you." id="destination8" name="drop_off" required/>
                                 </div>
                             </div>
                         </div>
@@ -66,11 +66,13 @@
                                     <label for="datepicker1">Pick up time</label>
                                     <div class="row">
                                         <div class="f-item one-half">
-                                            <div class="datepicker-wrap"><input type="text" placeholder="" id="datepicker1" name="depart_date" /></div>
+                                            <div class="datepicker-wrap">
+                                                <input type="text" placeholder="" id="datepicker1" name="depart_date" required/>
+                                            </div>
                                         </div>
                                         <div class="f-item one-half">
                                             <div class="indexpicker">
-                                                <input id="timepicker1" type="text" name="depart_time"/>
+                                                <input id="timepicker1" type="text" name="depart_time" required/>
                                             </div>
                                         </div>
                                     </div>
@@ -79,11 +81,13 @@
                                     <label for="datepicker2">Drop of time</label>
                                     <div class="row">
                                         <div class="f-item one-half">
-                                            <div class="datepicker-wrap"><input type="text" placeholder="" id="datepicker2" name="return_date" /></div>
+                                            <div class="datepicker-wrap">
+                                                <input type="text" placeholder="" id="datepicker2" name="return_date" required/>
+                                            </div>
                                         </div>
                                         <div class="f-item one-half">
                                             <div class="indexpicker">
-                                                <input id="timepicker2" type="text" name="return_time"/>
+                                                <input id="timepicker2" type="text" name="return_time" required/>
                                             </div>
                                         </div>
                                     </div>

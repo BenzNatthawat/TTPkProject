@@ -31,4 +31,8 @@ class User extends Authenticatable
     public function bookings(){
         return $this->belongsToMany('App\Models\Booking');
     }
+
+    public function maps(){
+        return $this->hasOne('App\Models\Map', 'users_id');
+    }
 }

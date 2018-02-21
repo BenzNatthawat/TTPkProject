@@ -166,50 +166,103 @@
 						<article>
 							<h2>Score Breakdown</h2>
 							<div class="score">
-								<span class="achieved">8 </span>
+								<span class="achieved">{{ round(($Excellent*1+$Verygood*0.8+$Average*0.6+$Poor*0.4+$Terrible*0.2)/$sum*10,1)}} </span>
 								<span> / 10</span>
-								<p class="info">Based on 782 reviews</p>
+								@if($activities->reviews->isEmpty())
+								<p class="info">Based on {{$sum-1}} reviews</p>
+								@else
+								<p class="info">Based on {{$sum}} reviews</p>
+								@endif
 								<p class="disclaimer">reviews are written by our customers.
 							</div>
-							
+
 							<dl class="chart">
 								<dt>Excellent</dt>
-								<dd><span id="data-one" style="width:80%;">8</span></dd>
+								<dd><span id="data-one" style="width:{{$Excellent/$sum*100}}%;">{{$Excellent}}</span></dd>
 								<dt>Very good</dt>
-								<dd><span id="data-two" style="width:60%;">6</span></dd>
+								<dd><span id="data-two" style="width:{{$Verygood/$sum*100}}%;">{{$Verygood}}</span></dd>
 								<dt>Average</dt>
-								<dd><span id="data-three" style="width:80%;">8</span></dd>
+								<dd><span id="data-three" style="width:{{$Average/$sum*100}}%;">{{$Average}}</span></dd>
 								<dt>Poor </dt>
-								<dd><span id="data-four" style="width:100%;">10</span></dd>
+								<dd><span id="data-four" style="width:{{$Poor/$sum*100}}%;">{{$Poor}}</span></dd>
 								<dt>Terrible </dt>
-								<dd><span id="data-five" style="width:70%;">7</span></dd>
+								<dd><span id="data-five" style="width:{{$Terrible/$sum*100}}%;">{{$Terrible}}</span></dd>
 							</dl>
 						</article>
-						
 						<article>
 							<h2>Reviews</h2>
 							<ul class="reviews">
 								<!--review-->
-								<li>
+								<!-- <li>
 									<figure class="left">
 										<img src="../images/avatar.jpg" alt="avatar">
 										<address><span>Anonymous</span><br><br>22/06/2016</address>
 									</figure>
 									<div>สวยงามและสนุกมาก</div>
 								</li>
-								<!--//review-->
-								
-								<!--review-->
 								<li>
 									<figure class="left">
 										<img src="../images/avatar.jpg" alt="avatar">
 										<address><span>Anonymous</span><br><br>22/06/2016</address>
 									</figure>
 									<div>สวยงามมาก สดชื้น</div>
+								</li> -->
+								<!--//review-->
+
+								@if($activities->reviews->isEmpty())
+								<li style="text-align: center;">
+									<div>ไม่มีความคิดเห็น</div>
+								</li>
+								@else
+								@foreach($activities->reviews as $review)
+								<!--review-->
+								<li>
+									<figure class="left">
+										<img src="../images/avatar.jpg" alt="avatar">
+										<address><span>{{$review->user->user_name}}</span><br><br>{{$review->created_at}}</address>
+									</figure>
+									<div>{{$review->review}}</div>
 								</li>
 								<!--//review-->
+								@endforeach
+								@endif
 							</ul>
 						</article>
+
+						@auth
+						<article>
+							<form action="/postreview/{{$id}}" method="post" enctype="multipart/form-data">
+								<div>
+									<textarea name="review" placeholder="Add Reviews"></textarea>
+								</div><br>
+								<div style="margin-left: 20px;">
+								<div class="f-item one-full" style="margin-bottom: 10px;">
+		                            <input type="radio" name="score_review" value="Excellent" checked required />
+		                            <label for="Excellent">Excellent</label>
+		                        </div>
+		                        <div class="f-item one-full" style="margin-bottom: 10px;">
+		                            <input type="radio" name="score_review" value="Very good" required/>
+		                            <label for="Very_good">Very good</label>
+		                        </div>
+		                        <div class="f-item one-full" style="margin-bottom: 10px;">
+		                            <input type="radio" name="score_review" value="Average" required/>
+		                            <label for="Average">Average</label>
+		                        </div>
+		                        <div class="f-item one-full" style="margin-bottom: 10px;">
+		                            <input type="radio" name="score_review" value="Poor" required/>
+		                            <label for="Poor">Poor</label>
+		                        </div>
+		                        <div class="f-item one-full" style="margin-bottom: 10px;">
+		                            <input type="radio" name="score_review" value="Terrible" required/>
+		                            <label for="Terrible">Terrible</label>
+		                        </div>
+		                        </div>
+								{{ csrf_field() }}
+		                        <input type="submit" value="Submit">
+							</form>
+						</article>
+						@endauth
+
 					</section>
 					<!--//reviews-->
 				</section>
@@ -223,6 +276,19 @@
 
 @endsection
 @section('js')
+<script>
+function myFunction() {
+    var score_review = document.forms[0];
+    var txt = "";
+    var i;
+    for (i = 0; i < score_review.length; i++) {
+        if (score_review[i].checked) {
+            txt = txt + score_review[i].value + " ";
+        }
+    }
+    document.getElementById("order").value = "You ordered a score with: " + txt;
+}
+</script>
 	<script type="text/javascript">
 	function initMap() {
 		var Platitude = parseFloat(document.getElementById('latitude').value);

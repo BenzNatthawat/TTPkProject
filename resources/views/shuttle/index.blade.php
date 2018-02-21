@@ -60,11 +60,11 @@
                                 <div class="row">
                                     <div class="f-item one-half">
                                         <label for="destination7">Pick Up</label>
-                                        <input type="text" placeholder="Where the place that pick up you." id="destination7" name="pick_up" />
+                                        <input type="text" placeholder="Where the place that pick up you." id="pick" name="pick_up" required />
                                     </div>
                                     <div class="f-item one-half">
                                         <label for="destination8">Drop Off</label>
-                                        <input type="text" placeholder="Where the place that drop off you." id="destination8" name="drop_off" />
+                                        <input type="text" placeholder="Where the place that drop off you." id="Drop" name="drop_off" required />
                                     </div>
                                 </div>
                             </div>
@@ -76,17 +76,17 @@
                                 </div>
                                 <div id="embed_div" style="display:none; ">
                                     <div class="full-width">
-                                            <div id="floating-panel1">
-                                                <input id="address1" type="text" value="search Where the place that pick up">
-                                                <input class="gradient-button" style="margin-top: 5px;" type="button" id="myBtn1" value="search"> 
-                                            </div>
-                                            <div id="floating-panel2">
-                                                <input id="address" type="text" value="search Where the place that pick up">
-                                                <input class="gradient-button" style="margin-top: 5px;" type="button" id="myBtn2" value="search"> 
-                                            </div>
-                                            <div style="margin-left: 20%" id="map"></div>
+                                        <div id="floating-panel1">
+                                            <input id="address1" type="text" placeholder="search Where the place that pick up">
+                                            <input class="gradient-button" style="margin-top: 5px;" type="button" id="myBtn1" value="search"> 
+                                        </div>
+                                        <div id="floating-panel2">
+                                            <input id="address2" type="text" placeholder="search Where the place that pick up">
+                                            <input class="gradient-button" style="margin-top: 5px;" type="button" id="myBtn2" value="search"> 
                                         </div>
                                     </div>
+                                </div>
+                                <div style="margin-left: 20%" id="map"></div>
                             </div>        
 
                             <!--column-->
@@ -97,11 +97,13 @@
                                         <label for="datepicker1">Pick up time</label>
                                         <div class="row">
                                             <div class="f-item one-half">
-                                                <div class="datepicker-wrap"><input type="text" placeholder="" id="datepicker1" name="depart_date" /></div>
+                                                <div class="datepicker-wrap">
+                                                    <input type="text" placeholder="" id="datepicker1" name="depart_date" required/>
+                                                </div>
                                             </div>
                                             <div class="f-item one-half">
                                                 <div class="indexpicker">
-                                                    <input id="timepicker1" type="text" name="depart_time"/>
+                                                    <input id="timepicker1" type="text" name="depart_time" required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -110,11 +112,13 @@
                                         <label for="datepicker2">Drop of time</label>
                                         <div class="row">
                                             <div class="f-item one-half">
-                                                <div class="datepicker-wrap"><input type="text" placeholder="" id="datepicker2" name="return_date" /></div>
+                                                <div class="datepicker-wrap">
+                                                    <input type="text" placeholder="" id="datepicker2" name="return_date" required/>
+                                                </div>
                                             </div>
                                             <div class="f-item one-half">
                                                 <div class="indexpicker">
-                                                    <input id="timepicker2" type="text" name="return_time"/>
+                                                    <input id="timepicker2" type="text" name="return_time" required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -206,30 +210,33 @@
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
           center: position,
-          zoom: 16
+          zoom: 13
         });
 
         var geocoder = new google.maps.Geocoder();
 
         document.getElementById('myBtn1').addEventListener('click', function() {
-            geocodeAddress(geocoder, map);
+            geocodeAddress(geocoder, map, document.getElementById('address1').value, "/images/map-people.png");
+            document.getElementById('pick').value=document.getElementById('address1').value;
         });
         document.getElementById('myBtn2').addEventListener('click', function() {
-            geocodeAddress(geocoder, map);
+            geocodeAddress(geocoder, map, document.getElementById('address2').value, "/images/map-goal.png");
+            document.getElementById('Drop').value=document.getElementById('address2').value;
         });
 
       }
-      function geocodeAddress(geocoder, resultsMap){
-        var address = document.getElementById('address').value;
+      function geocodeAddress(geocoder, resultsMap, address, iconmap){
         geocoder.geocode({'address': address}, function(results, status) {
           if (status === 'OK') {
+
             resultsMap.setCenter(results[0].geometry.location);
               var lat = results[0].geometry.location.lat();
               var lng = results[0].geometry.location.lng();
             var marker = new google.maps.Marker({
               map: resultsMap,
               position: results[0].geometry.location,
-              draggable:true
+              draggable:true,
+              icon:iconmap,
             });
           } else {
             alert('Noooo!!!!!' + status);

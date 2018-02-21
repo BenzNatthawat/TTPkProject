@@ -14,23 +14,31 @@
                     <div class="static-content index">
                         <div class="row">
                             <h1>Activity</h1>
-                            @foreach( $activities as $index => $item )
+                            @foreach( $activities as $item )
                             <!--deal-->
                             <article class="one-fourth" id="be">
-                                <input type="hidden" value="{{$index = 1}}">
-                                @foreach( $item->images as $img)
-                                @if($img->activities_id === $item->id && $index === 1)
+                                @foreach( $item->images as $index => $img)
+                                @if($img->activities_id == $item->id && $index == 1)
                                     <figure><a href="activity/{{$item->id}}" title=""><img style="width: 900px; height: 180px;" src="img/{{$img->image_name}}" alt="{{$item->activity_name}}" /></a></figure>
-                                    <input type="hidden" value="{{$index=0}}">
                                 @endif
                                 @endforeach 
                                 <div class="details" style="height: 245px;">
+                                    <?php
+                                        $Excellent = $item->reviews->where('score_review', 'Excellent')->count();
+                                        $Verygood = $item->reviews->where('score_review', 'Very good')->count();
+                                        $Average = $item->reviews->where('score_review', 'Average')->count();
+                                        $Poor = $item->reviews->where('score_review', 'Poor')->count();
+                                        $Terrible = $item->reviews->where('score_review', 'Terrible')->count();
+                                        $sum = $item->reviews->count();
+                                        $sum!=0?$sum:$sum=1;
+                                        $score = round(($Excellent*1+$Verygood*0.8+$Average*0.6+$Poor*0.4+$Terrible*0.2)/$sum*4,0);
+                                    ?>
+
                                     <h3 class="phometitle">{{$item->activity_name}}
                                         <span class="stars">
+                                            @for($i=0; $i<=$score; $i++)
                                             <i class="material-icons"></i>
-                                            <i class="material-icons"></i>
-                                            <i class="material-icons"></i>
-                                            <i class="material-icons"></i>
+                                            @endfor
                                         </span>                                    
                                     </h3>
                                     <div class="description">

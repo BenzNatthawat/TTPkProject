@@ -51,6 +51,9 @@
                             @endif
 
                         </div>
+                        <div class="full-width-page">
+                            {{ $packages->links() }}
+                        </div>
                     </div>
                     <!--//latest offers-->
                     

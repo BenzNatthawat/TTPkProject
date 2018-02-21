@@ -15,32 +15,57 @@
                         <!--deal-->
                     	<article class="two-third">
                             <div class="static-content create"> 
-                            <form action="/booking/{{$booking->id}}/create/3" method="post" enctype="multipart/form-data">
+                            <form action="/booking" method="post" enctype="multipart/form-data">
                                 @foreach($book as $index => $item)
                                     <input type="hidden" name="{{$index}}" value="{{$item}}" />
                                 @endforeach
-                                <h2><span> 02:Number of Party </span> {{$booking->activity_name}}</h2>
+                                <h2><span> 02:Confirmation </span> {{$booking->activity_name}}</h2>
                                 <div class="row">
-                                    <div class="f-item one-half">
-                                        <label for="Adult">Adult (s)</label><span class="info">Over 11 Years old</span>
-                                        <input type="number" name="number_adult" value="1" min="1" max="20" />
-                                    </div> 
-                                    <div class="f-item one-half">
-                                        <label for="Childs">Child (s)</label><span class="info">4 - 11 Years old</span>
-                                        <input type="number" name="number_child" value="0" min="0" max="20" />
-                                    </div>
-                                    <div class="f-item one-half">
-                                        <label for="Infant / Baby">Infant(s) / Baby(s)</label><span class="info">Age below 4 Years old</span>
-                                        <input type="number" name="number_baby" value="0" min="0" max="20" />
-                                    </div> 
-                                    <div class="f-item one-half">
-                                        <label for="Travel Date">Travel Date</label>
-                                        <div class="datepicker-wrap"><input type="text" placeholder="" id="datepicker5" name="booking_date" /></div>
-                                    </div>
+                                    <fieldset>
+                                        <table id="customers">
+                                            
+                                            <tr>
+                                                <td>E-mail</td>
+                                                <td>{{$book['email']}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Phone number:</td>
+                                                <td>{{$book['telephone']}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Town / City: </td>
+                                                <td>{{$book['town_city']}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Country:</td>
+                                                <td>{{$book['country']}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Adult (s):</td>
+                                                <td>{{$book['number_adult']}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Child (s):</td>
+                                                <td>{{$book['number_child']}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Infant(s) / Baby(s):</td>
+                                                <td>{{$book['number_baby']}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Travel Date:</td>
+                                                <td>{{$book['booking_date']}}</td>
+                                            </tr>
+                                        </table>
+                                    </fieldset>
                                 </div>
-									<input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="full-width">
-								    <input type="submit" value="Submit">
+                                    <input type="checkbox" id="chkCon" onClick="check(this)" />
+                                    ยอมรับข้อตกลง
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                </div>
+                                <div class="full-width">
+								    <input type="submit" id="btnSend" value="ตกลง" disabled/>
                                 </div>
 							</form>
                         </div>
@@ -83,5 +108,18 @@
         </div>
     </main>
     <!--//main-->
+
+@endsection
+
+@section('js')
+<script type="text/javascript">
+  function check(e){
+    if(e.checked == true) {
+        document.getElementById('btnSend').disabled=false;
+    } else {
+        document.getElementById('btnSend').disabled=true;
+    }   
+}
+</script>
 
 @endsection

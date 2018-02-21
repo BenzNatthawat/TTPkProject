@@ -19,4 +19,8 @@ class Activity extends Model
     public function bookings(){
         return $this->hasOne('App\Models\Booking', 'id');
     }
+
+    public function reviews(){
+        return $this->hasMany('App\Models\Review', 'activities_id');
+    }
 }

@@ -17,10 +17,13 @@ class PackageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $pagenum = 3;
         $user = Auth::user();
-        $packages = Packagesservice::all();
+        $packages = Packagesservice::orderBy('id')->paginate($pagenum);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
         return view('package.index')    ->with('packages',$packages)
                                         ->with('user',$user);
     }

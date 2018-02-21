@@ -6,6 +6,7 @@ use App\Models\Activity;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use Auth;
+use App\Http\Requests\StorePostRequest;
 
 class BookingController extends Controller
 {
@@ -17,6 +18,7 @@ class BookingController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->only('create');
+        $this->middleware('auth')->only('position');
     }
     
     public function index()
@@ -35,16 +37,29 @@ class BookingController extends Controller
     public function create($id_activity,$id_book,Request $request)
     {
         $booking = Activity::findOrFail($id_activity);
-        if($id_book == 1)
+
+        if($id_book == 2){
+            $rules = [
+                "first_name" => "required|max:20|min:3",
+                "last_name" => "required|max:20|min:3",
+                "email" => "required|max:20|min:5|email",
+                "telephone" => "required|digits:10",
+                "town_city" => "required|max:20|min:5",
+                "country" => "required|max:20|min:5",
+                "number_adult" => "required|numeric",
+                "number_child" => "required|numeric",
+                "number_baby" => "required|numeric",
+                "booking_date" => "required",
+            ];
+            $this->validate($request, $rules);
+        }
+            
+        if($id_book == 1){
             return view('booking.create1')  ->with('booking', $booking);
+        }
         else if($id_book == 2){
             $book = $request->all();
             return view('booking.create2')  ->with('booking', $booking)
-                                            ->with('book', $book);
-        }
-        else if($id_book == 3){
-            $book = $request->all();
-            return view('booking.create3')  ->with('booking', $booking)
                                             ->with('book', $book);
         }
     }
@@ -57,6 +72,7 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
+
         $user = Auth::user();
         Booking::create( $request->all() );
         $bookid = Booking::all()->last();
@@ -109,6 +125,16 @@ class BookingController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $book = Booking::findOrFail($id);
+        $book->users()->sync([]);
+        $book->delete();
+        return redirect('/booking');
+    }
+
+    public function position()
+    {
+        $user = Auth::user();
+        // dd($user);
+        return view('booking.position')->with('user', $user);
     }
 }

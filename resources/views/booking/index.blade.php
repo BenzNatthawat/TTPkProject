@@ -24,22 +24,32 @@
                         <td>{{$index+1}}</td>
                         <td>{{$book->activity->activity_name}}</td>
                         <td>{{$book->created_at}}</td>
-                        <td><input type="submit" name="" value="{{$book->booking_status}}"></td>
+                        <form action="/booking/{{$book->id}}" method="POST">
+                        <td>
+                            <input type="submit" name="" value="{{$book->booking_status}}">
+                        </td>
                         <td>
                             <input class="edit-button" type="button" name="" value="Edit">
-                            <input class="delete-button" id="delete" type="button" name="" value="Delete">
+                            <input id="delete-button" type="submit" name="_method" value="DELETE">
                         </td>
+                        {{ csrf_field() }}
+                        </form>
                     </tr>
                     @else
                     <tr>
                         <td>{{$index+1}}</td>
                         <td>{{$book->shuttle->pick_up}} => {{$book->shuttle->drop_off}}</td>
                         <td>{{$book->created_at}}</td>
-                        <td><input type="submit" name="" value="{{$book->booking_status}}"></td>
+                        <form action="/booking/{{$book->id}}" method="POST">
+                        <td>
+                            <input type="submit" name="" value="{{$book->booking_status}}">
+                        </td>
                         <td>
                             <input class="edit-button" type="button" name="" value="Edit">
-                            <input class="delete-button" id="delete" type="button" name="" value="Delete">
+                            <input id="delete-button" type="submit" name="_method" value="DELETE">
                         </td>
+                        {{ csrf_field() }}
+                        </form>
                     </tr>
                     @endif
                     @endforeach

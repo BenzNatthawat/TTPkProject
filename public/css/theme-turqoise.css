@@ -13,7 +13,7 @@ ul > li:before,.booking,.create h2 span
     background:#5FC8C2 !important;
 }
 
-.delete-button
+#delete-button
 {
     background: #c85f5f;
     background: -moz-linear-gradient(top, #c85f5f 0%, #8f2626 100%);
@@ -24,7 +24,7 @@ ul > li:before,.booking,.create h2 span
     background: linear-gradient(to bottom, #c85f5f 0%,#8f2626 100%);
 }
 
-.delete-button:hover, .delete-button:focus
+#delete-button:hover, #delete-button:focus
 {
     background: #8f2626;
     background: -moz-linear-gradient(top, #8f2626 0%, #c85f5f 100%);

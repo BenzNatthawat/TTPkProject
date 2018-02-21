@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Auth;
 use Input as Input;
 use App\Models\Image;
+use App\Models\Review;
+
 
 class ActivityController extends Controller
 {
@@ -65,11 +67,19 @@ class ActivityController extends Controller
                 $imageName = rand();
                 $imageSur = $file->getClientOriginalExtension();
                 $nameimg = $imageName.'.'.$imageSur;
+
+                // $cur_dir = explode('\\', getcwd());
+                // $ddd =  $cur_dir[count($cur_dir)-1];
+                // $ddd = $ddd.'/img/';
+                // echo $ddd.$nameimg;
+                // $file->move($ddd, $nameimg);
+                
                 $file->move(base_path() . '/public/img/', $nameimg);
                 $img = new Image;
                 $img->image_name = $nameimg;
                 $img->activities_id = $imgid->id;
                 $img->save();
+                echo base_path();
             }
         }
 
@@ -85,8 +95,23 @@ class ActivityController extends Controller
     public function show($id)
     {
         $activities = Activity::findOrFail($id);
+        $Excellent = $activities->reviews->where('score_review', 'Excellent')->count();
+        $Verygood = $activities->reviews->where('score_review', 'Very good')->count();
+        $Average = $activities->reviews->where('score_review', 'Average')->count();
+        $Poor = $activities->reviews->where('score_review', 'Poor')->count();
+        $Terrible = $activities->reviews->where('score_review', 'Terrible')->count();
+        $sum = $activities->reviews->count();
+        if($sum == 0)
+            $sum = 1;
         return view('activity.show')    ->with('activities',$activities)
-                                        ->with('id',$id);
+                                        ->with('id',$id)
+                                        ->with('Excellent',$Excellent)
+                                        ->with('Verygood',$Verygood)
+                                        ->with('Average',$Average)
+                                        ->with('Poor',$Poor)
+                                        ->with('Terrible',$Terrible)
+                                        ->with('sum',$sum);
+
     }
 
     /**
@@ -126,5 +151,35 @@ class ActivityController extends Controller
     {
         Activity::destroy($id);
         return redirect('/activity');
+    }
+
+    public function postreview(Request $request, $id_activity)
+    {
+        $request['users_id'] = Auth::user()->id;
+        $request['activities_id'] = $id_activity;
+        Review::create( $request->all() );
+
+            $objConnect = mysql_connect("localhost","root","") or die(mysql_error());
+            $objDB = mysql_select_db("testing");
+            $strSQL = "SELECT * FROM customer WHERE 1 ORDER BY CustomerID DESC ";
+            $objQuery = mysql_query($strSQL) or die (mysql_error());
+            $intNumField = mysql_num_fields($objQuery);
+            $resultArray = array();
+            while($obResult = mysql_fetch_array($objQuery))
+            {
+                $arrCol = array();
+                for($i=0;$i<$intNumField;$i++)
+                {
+                    $arrCol[mysql_field_name($objQuery,$i)] = $obResult[$i];
+                }
+                array_push($resultArray,$arrCol);
+            }
+            
+            mysql_close($objConnect);
+            
+            echo json_encode($resultArray);
+
+    
+        return redirect()->action('ActivityController@show', ['id' => $id_activity]);
     }
 }

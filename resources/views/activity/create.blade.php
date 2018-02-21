@@ -13,7 +13,7 @@
                     <!--latest offers-->
                     <div class="row">
                         <!--deal-->
-                    	<article class="two-third">
+                    	<article class="full-width">
                             <div class="static-content create"> 
                             <form action="/activity" method="post" enctype="multipart/form-data">
                                 <h1>Create Activity</h1>
@@ -30,9 +30,23 @@
     								<label for="price child">price child</label>
     								<input type="number" name="price_child" placeholder="price child">
                                 </div>
+                                
                                 <div class="full-width">
     								<label for="desciption">desciption</label>
     								<textarea name="desciption"></textarea>
+                                </div>
+
+                                <div class="one-third">
+                                    <label for="start_time">start time</label>
+                                    <input id="timepicker1" type="text" name="start_time" placeholder="start_time">
+                                </div>
+                                <div class="one-third">
+                                    <label for="finish_time">finish time</label>
+                                    <input id="timepicker3" type="text" name="finish_time" placeholder="finish_time">
+                                </div>
+                                <div class="one-third">
+                                    <label for="take_time">take time</label>
+                                    <input id="timepicker2" type="text" name="take_time" placeholder="take_time">
                                 </div>
 
 								<div class="full-width">
@@ -61,6 +75,38 @@
 @endsection
 
 @section('js')
+
+<script src="../js/timepicki.js"></script>
+<script type="text/javascript"> 
+    $('#timepicker1').timepicki();
+    $('#timepicker2').timepicki();
+    $('#timepicker3').timepicki();
+    $('#timepicker4').timepicki();
+        (function( $ ) {
+            $(document).ready(function(){
+                $('.form').hide();
+                $('#form1').show();
+                $('.f-item:nth-child(1)').addClass('active');
+                $('.f-item:nth-child(1) span').addClass('checked');     
+
+                $('#hero-gallery').lightSlider({
+                    gallery:true,
+                    item:1,
+                    pager:false,
+                    gallery:false,
+                    slideMargin: 0,
+                    speed:2000,
+                    pause:6000,
+                    mode: 'fade',
+                    auto:true,
+                    loop:true,
+                    onSliderLoad: function() {
+                        $('#hero-gallery').removeClass('cS-hidden');
+                    }  
+                });         
+            });
+        })(jQuery);
+    </script>
     <script type="text/javascript">
     function initMap() {
         

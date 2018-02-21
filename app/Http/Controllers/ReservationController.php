@@ -34,6 +34,28 @@ class ReservationController extends Controller
     {
         $book = $request->all();
         $user = Auth::user();
+
+        if($id_book == 2){
+            $rules = [
+                // "radio" => "required|max:20|min:3",
+                // "pick_up" => "required|max:20|min:3",
+                // "drop_off" => "required|max:20|min:3",
+                // "depart_date" => "required|max:20|min:3",
+                // "depart_time" => "required|max:20|min:3",
+                // "return_date" => "required|max:20|min:3",
+                // "return_time" => "required|max:20|min:3",
+                // "vehicle_type" => "required|max:20|min:3",
+                // "round" => "required|max:20|min:3",
+                "first_name" => "required|max:20|min:3",
+                "last_name" => "required|max:20|min:3",
+                "email" => "required|max:20|min:5|email",
+                "telephone" => "required|digits:10",
+                "town_city" => "required|max:20|min:5",
+                "country" => "required|max:20|min:5",
+            ];
+            $this->validate($request, $rules);
+        }
+
         if($id_book == 1)
             return view('reservation.create1')  ->with('book', $book)
                                                 ->with('user',$user);

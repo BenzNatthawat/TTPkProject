@@ -28,9 +28,17 @@ Route::resource('/reservation','ReservationController');
 Route::get('/reservation/create/{id_book}','ReservationController@create');
 Route::post('/reservation/create/{id_book}','ReservationController@create');
 
+Route::post('/postreview/{id_activity}','ActivityController@postreview');
+
 Route::get('/home', function () {
     return view('home');
 });
+
+Route::get('/positions','BookingController@position');
 Auth::routes();
+
+Route::get('/test', function () {
+    return view('test');
+});
 
 //Route::get('/home', 'HomeController@index')->name('home');
