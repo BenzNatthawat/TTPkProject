@@ -5,7 +5,7 @@
 @section('content')
 <style type="text/css">
     #map {   
-        width:550px;  
+        width:80%;  
         height:400px;  
         margin:auto; 
     }  
@@ -21,19 +21,31 @@
                             <h1>Position</h1>
                             <div id="map"></div>
                             <div id="showDD" style="margin:auto;padding-top:5px;width:550px;">    
-                            <form id="form_get_detailMap" name="form_get_detailMap" method="post" action="">    
-                            Latitude    
-                            <input name="lat_value" type="text" id="lat_value" value="0" />  <br />  
-                            Longitude    
-                            <input name="lon_value" type="text" id="lon_value" value="0" />  <br />  
-                            Zoom    
-                            <input name="zoom_value" type="text" id="zoom_value" value="0" size="5" />    
-                            <br />  
-                            <input type="submit" name="button" id="button" value="บันทึก" />    
-                            </form>    
+                            <div class="one-half">
+                                <form id="form_get_detailMap" name="form_get_detailMap" method="post" action="">
+                                Latitude    
+                                <input name="lat_value" type="text" id="lat_value" value="0" />  <br />  
+                                Longitude    
+                                <input name="lon_value" type="text" id="lon_value" value="0" />  <br />  
+                                Zoom    
+                                <input name="zoom_value" type="text" id="zoom_value" value="0" size="5" />    
+                                <br />  
+                                <input type="submit" name="button" id="button" value="บันทึก" />    
+                                </form>    
                             </div>
-
                             
+                            <div class="one-half">
+                                <form id="form_get_detailMap" name="form_get_detailMap" method="post" action="">    
+                                Latitude    
+                                <input name="lat_value" type="text" id="drilat_value" value="0" />  <br />  
+                                Longitude    
+                                <input name="lon_value" type="text" id="drilon_value" value="0" />  <br />
+
+                                <input type="submit" name="button" id="button" value="บันทึก" />    
+                                </form> 
+                            </div>
+                               
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -45,17 +57,53 @@
 @endsection
 
 @section('js')
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
 <!-- <script src="js/map-position.js"></script> ตำแหน่งของคนเดียว -->
 <script type="text/javascript">
 var map; // กำหนดตัวแปร map ไว้ด้านนอกฟังก์ชัน เพื่อให้สามารถเรียกใช้งาน จากส่วนอื่นได้  
 var GGM; // กำหนดตัวแปร GGM ไว้เก็บ google.maps Object จะได้เรียกใช้งานได้ง่ายขึ้น  
 var my_Marker;  // กำหนดตัวแปรเก็บ marker ตำแหน่งปัจจุบัน หรือที่ระบุ 
-var drlat = {!! $user->maps->latitude or 0 !!}
+var drlat = {!! $user->maps->latitude or 0 !!};
 var drlng = {!! $user->maps->longitude or 0 !!}
 var positionx={lat: drlat, lng: drlng}
 google.maps.event.addDomListener(window, 'load', initialize);
 
+function getDataFromDb()
+{
+    var data = {
+      "action": "4"
+    };
+    $.ajax({ 
+        url: "getData" ,
+        type: "get",
+        data: {users_id: 4}
+    })
+    .success(function(result) { 
+        var obj = jQuery.parseJSON(result);
+            if(obj != '')
+            {
+                  //$("#myTable tbody tr:not(:first-child)").remove();
+                  $("#myBody").empty();
+                  $.each(obj, function(key, val) {
+                            var tr = "<tr>";
+                            tr = tr + "<td>" + val["location_name"] + "</td>";
+                            tr = tr + "<td>" + val["latitude"] + "</td>";
+                            tr = tr + "<td>" + val["longitude"] + "</td>";
+                            tr = tr + "</tr>";
+                            $('#myTable > tbody:last').append(tr);
+                        var xx = document.getElementById("drilat_value");
+                        var xy = document.getElementById("drilon_value");
+                        xx.value = val["latitude"];
+                        xy.value = val["longitude"];
+                  });
+                
+            }
+
+    });
+
+}
+setInterval(getDataFromDb, 3000);   // 1000 = 1 second
 function initialize() {
   GGM=new Object(google.maps); // เก็บตัวแปร google.maps Object ไว้ในตัวแปร GGM  
   if(navigator.geolocation){    

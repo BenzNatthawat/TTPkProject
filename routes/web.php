@@ -41,4 +41,12 @@ Route::get('/test', function () {
     return view('test');
 });
 
+Route::get('/getData', function () {
+    return view('json.getData');
+});
+
+Route::get('/postData', function () {
+    return view('json.postData');
+});
+
 //Route::get('/home', 'HomeController@index')->name('home');
