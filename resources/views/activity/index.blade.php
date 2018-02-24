@@ -60,22 +60,17 @@
                                     </div>
                                     <span class="price">start from <em>{{$item->price_adult}} THB</em></span>
                                     
-                                    <a href="/booking/{{$item->id}}/create/1" title="Book now" class="gradient-button">Book now</a>
+                                    <form action="/activity/{{$item->id}}" method="post" enctype="multipart/form-data">
+                                    <a href="/BookingActivity/{{$item->id}}/create/1" title="Book now" class="gradient-button">Book now</a>
 
                                     @if($user != NULL)
                                         @if($user->roles->role_name == "admin")
                                             <a href="/activity/{{$item->id}}/edit" class="edit-button">Edit</a>
-
-                        <form action="/activity/{{$item->id}}" method="post" enctype="multipart/form-data">
-
                                             <input id="delete-button" type="submit" name="_method" value="DELETE">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-                        </form>
-
                                         @endif
                                     @endif
-
+                                    </form>
                                 </div>
                             </article>
                             <!--//deal-->

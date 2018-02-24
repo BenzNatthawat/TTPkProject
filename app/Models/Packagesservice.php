@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Packagesservice extends Model
 {
-    protected $table = 'packagesservices';
+    protected $fillable = ['package_name', 'price_package', 'desciption', 'start_time', 'finish_time	', 'take_time',];
 }

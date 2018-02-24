@@ -88,12 +88,14 @@
                                         </h3>
                                     </div>
                                     <hr>
+                                    @if($booking->images != NULL)
                                     @foreach( $booking->images as  $index => $img)
                                     @if($index === 1)
                                         <figure><a href="#" title=""><img src="/img/{{$img->image_name}}" alt="{{$booking->activity_name}}" /></a></figure>
                                         <input type="hidden" value="{{$index=0}}">
                                     @endif
                                     @endforeach 
+                                    @endif
                                     <!--//deal-->
                                 </div>
                             </div>

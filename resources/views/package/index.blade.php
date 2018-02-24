@@ -18,7 +18,7 @@
                             <!--deal-->
                             <article class="one-third" id="be">
 
-                                <figure><a href="activity/{{$item->id}}" title="">
+                                <figure><a href="package/{{$item->id}}" title="">
                                 <img style="width: 900px; height: 250px;" src="/images/tour.jpg" alt="tour" /></a></figure>
 
                                 <div class="details" style="height: 245px;">
@@ -34,8 +34,19 @@
                                         <p class="phome">{{$item->desciption}}</p><a href="/package/{{$item->id}}">More info</a>
                                     </div>
                                     <span class="price">start from <em>{{$item->price_package}} THB</em></span>
-                                    
-                                    <a href="/booking/{{$item->id}}/create/1" title="Book now" class="gradient-button">Book now</a>
+
+                                    <form action="/package/{{$item->id}}" method="post" enctype="multipart/form-data">
+                                    <a href="/BookingPackage/{{$item->id}}/create/1" title="Book now" class="gradient-button">Book now</a>
+
+                                    @if($user != NULL)
+                                        @if($user->roles->role_name == "admin")
+                                            <a href="/package/{{$item->id}}/edit" class="edit-button">Edit</a>
+                                            <input id="delete-button" type="submit" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        @endif
+                                    @endif
+                                    </form>
+
                                 </div>
                             </article>
                             <!--//deal-->

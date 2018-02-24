@@ -2,31 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Activity;
 use Illuminate\Http\Request;
+use App\Models\Packagesservice;
 use App\Models\Booking;
 use Auth;
 use App\Http\Requests\StorePostRequest;
 
-class BookingController extends Controller
+class BookingPackageController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->only('create');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('auth')->only('create');
-        $this->middleware('auth')->only('position');
-    }
-    
     public function index()
     {
-        $user = Auth::user();
-        $bookings = Booking::all();
-        return view('booking.index')    ->with('user',$user)
-                                        ->with('bookings',$bookings);
+        //
     }
 
     /**
@@ -34,15 +30,15 @@ class BookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id_activity,$id_book,Request $request)
+    public function create($id_package,$id_book,Request $request)
     {
-        $booking = Activity::findOrFail($id_activity);
+        $booking = Packagesservice::findOrFail($id_package);
 
         if($id_book == 2){
             $rules = [
                 "first_name" => "required|max:20|min:3",
                 "last_name" => "required|max:20|min:3",
-                "email" => "required|max:20|min:5|email",
+                "email" => "required|min:5|email",
                 "telephone" => "required|digits:10",
                 "town_city" => "required|max:20|min:5",
                 "country" => "required|max:20|min:5",
@@ -55,12 +51,12 @@ class BookingController extends Controller
         }
             
         if($id_book == 1){
-            return view('booking.create1')  ->with('booking', $booking);
+            return view('booking.createpackage1')  ->with('booking', $booking);
         }
         else if($id_book == 2){
             $book = $request->all();
-            return view('booking.create2')  ->with('booking', $booking)
-                                            ->with('book', $book);
+            return view('booking.createpackage2')  ->with('booking', $booking)
+                                                    ->with('book', $book);
         }
     }
 
@@ -72,12 +68,7 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-
-        $user = Auth::user();
-        Booking::create( $request->all() );
-        $bookid = Booking::all()->last();
-        $bookid->users()->sync(Auth()->user()->id);
-        return redirect('/booking');
+        //
     }
 
     /**
@@ -111,10 +102,7 @@ class BookingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $Bookings = Booking::findOrFail($id);      
-        $Bookings->booking_status = $request->booking_status;
-        $Bookings->update();
-        return redirect('/booking');
+        //
     }
 
     /**
@@ -125,16 +113,6 @@ class BookingController extends Controller
      */
     public function destroy($id)
     {
-        $book = Booking::findOrFail($id);
-        $book->users()->sync([]);
-        $book->delete();
-        return redirect('/booking');
-    }
-
-    public function position()
-    {
-        $user = Auth::user();
-        // dd($user);
-        return view('booking.position')->with('user', $user);
+        //
     }
 }

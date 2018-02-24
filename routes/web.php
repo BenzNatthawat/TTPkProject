@@ -19,9 +19,15 @@ Route::post('/searchform','ActivityController@searchform');
 
 Route::resource('/package','PackageController');
 
-Route::resource('/booking','BookingController');
-Route::get('/booking/{id_activity}/create/{id_book}','BookingController@create');
-Route::post('/booking/{id_activity}/create/{id_book}','BookingController@create');
+Route::get('/booking','BookingAtivityController@index');
+
+Route::resource('/BookingActivity','BookingAtivityController');
+Route::get('/BookingActivity/{id_activity}/create/{id_book}','BookingAtivityController@create');
+Route::post('/BookingActivity/{id_activity}/create/{id_book}','BookingAtivityController@create');
+
+Route::resource('/BookingPackage','BookingPackageController');
+Route::get('/BookingPackage/{id_package}/create/{id_book}','BookingPackageController@create');
+Route::post('/BookingPackage/{id_package}/create/{id_book}','BookingPackageController@create');
 
 Route::resource('/account','AccountController');
 

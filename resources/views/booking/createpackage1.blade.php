@@ -15,8 +15,8 @@
                         <!--deal-->
                     	<article class="two-third">
                             <div class="static-content create">
-                            <form action="/BookingActivity/{{$booking->id}}/create/2" method="post" enctype="multipart/form-data">
-                                <input type="hidden" name="activities_id" value="{{$booking->id}}">
+                            <form action="/BookingPackage/{{$booking->id}}/create/2" method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="packageservices_id" value="{{$booking->id}}">
                                 <!-- <input type="hidden" name="shuttles_id" value="0">
                                 <input type="hidden" name="packageservices_id" value="0"> -->
                                 <h2><span> 01:Traveller info </span> {{$booking->activity_name}}</h2>

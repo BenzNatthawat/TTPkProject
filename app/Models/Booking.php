@@ -19,4 +19,8 @@ class Booking extends Model
     public function shuttle(){
         return $this->hasOne('App\Models\Shuttle', 'id', 'shuttles_id');
     }
+
+    public function package(){
+        return $this->hasOne('App\Models\Packagesservice', 'id', 'packageservices_id');
+    }
 }
