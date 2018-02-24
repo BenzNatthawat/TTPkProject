@@ -348,11 +348,11 @@ aside .widget h5            {font:700 14px 'Open Sans', Helvetica, Arial, sans-s
 .logo {float:left;display:block;padding:15px 0;}
 .logo img {height:50px;}
 
-.header .search                                     {float:right;display:block;margin:21px 120px 0 0;width:250px;}
-.header .search form                            {position:relative;top:0;left:0;width:100%;}
-.header .search form:after                  {font-family: 'Material Icons';content:"\e8b6";font-size:22px;position:absolute;top:2px;right:10px;color:#B1A398;}
-.header .search input                           {padding:8px 15px;}
-.header .search input[type="submit"]    {z-index:10;width:37px;height:37px;background:transparent;font-size:0;text-align:right;cursor:pointer;position:absolute;top:0;right:0;-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;}
+.search-body .search                                     {float:right;display:block;margin:-70px 0px 0 0;width:50%; max-width:400px;}
+.search-body .search form                            {position:relative;top:0;left:0;width:100%;}
+.search-body .search form:after                  {font-family: 'Material Icons';content:"\e8b6";font-size:22px;position:absolute;top:2px;right:10px;color:#B1A398;}
+.search-body .search input                           {padding:8px 15px;}
+.search-body .search input[type="submit"]    {z-index:10;width:37px;height:37px;background:transparent;font-size:0;text-align:right;cursor:pointer;position:absolute;top:0;right:0;-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;}
 
 .contact                    {float:right;display:block;position:relative;margin:20px 22px 0;padding:0 0 0 40px;}
 .contact span           {display:block;font-size:12px;color:#858585;}

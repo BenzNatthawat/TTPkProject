@@ -26,7 +26,7 @@ class ActivityController extends Controller
     public function index(Request $request)
     {
         $pagenum = 8;
-        $activities = Activity::orderBy('id','desc')->paginate($pagenum);
+        $activities = Activity::orderBy('id','desc')->where('destroy','like',1)->paginate($pagenum);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
 
@@ -136,7 +136,7 @@ class ActivityController extends Controller
     public function update(Request $request, $id)
     {
         $activities = Activity::findOrFail($id);      
-            
+        
         $activities->update($request->all());
         return redirect('/activity');
     }
@@ -149,7 +149,9 @@ class ActivityController extends Controller
      */
     public function destroy($id)
     {
-        Activity::destroy($id);
+        $Activitydes = Activity::findOrFail($id);
+        $Activitydes->destroy = 0;
+        $Activitydes->save();
         return redirect('/activity');
     }
 
@@ -159,5 +161,18 @@ class ActivityController extends Controller
         $request['activities_id'] = $id_activity;
         Review::create( $request->all() );
         return redirect()->action('ActivityController@show', ['id' => $id_activity]);
+    }
+
+    public function searchform(Request $request)
+    {
+        $pagenum = 8;
+        $search = $request->get('site_search');
+        $activities = Activity::where('activity_name','like','%'.$search.'%')->paginate($pagenum);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+
+        $user = Auth::user();
+        return view('activity.index')   ->with('activities',$activities)
+                                        ->with('user',$user);
     }
 }

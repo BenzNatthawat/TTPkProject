@@ -18,12 +18,12 @@
     </ul>
 </div>
 <!--//slider-->
-<!--search-->
+
+<!--search--><!-- 
 <div class="main-search">
     <div class="wrap">
         <form id="main-search" method="post" action="/reservation/create/1">
             <div class="row">
-                <!--column-->
                 <div class="column radios one-fourth">
                     <h5><span>01</span> What?</h5>
                     <div class="row" style="margin-left: 10px">
@@ -37,12 +37,8 @@
                         </div>
                     </div>
                 </div>
-                <!--//column-->
-                
                 <div class="three-fourth">
-                    <!--form rent a driver-->
                     <div class="form row" id="form1">
-                        <!--column-->
                         <div class="column one-third">
                             <h5><span>02</span> Where?</h5>
                             <div class="row">
@@ -56,9 +52,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!--//column-->
-                        
-                        <!--column-->
                         <div class="column one-third">
                             <h5><span>03</span> When?</h5>
                             <div class="row">
@@ -94,9 +87,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!--//column-->
-                    
-                        <!--column-->
                         <div class="column one-third">
                             <h5><span>04</span> Who?</h5>
                             <div class="row">
@@ -117,14 +107,8 @@
                                 </div>
                             </div>
                         </div>
-                        <!--//column-->
                     </div>  
-                    <!--//form rent a driver-->
-
-                    
-                    <!--form rent a car-->
                     <div class="form row" id="form3">
-                        <!--column-->
                         <div class="column one-third">
                             <h5><span>02</span> Where?</h5>
                             <div class="row">
@@ -138,9 +122,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!--//column-->
-                        
-                        <!--column-->
                         <div class="column one-third">
                             <h5><span>03</span> When?</h5>
                             <div class="row">
@@ -162,7 +143,6 @@
                                     <div class="row">
                                         <div class="f-item one-half">
                                             <div class="datepicker-wrap"><input type="text" placeholder="" id="datepicker5" name="drop_off_date"/>
-                                                <!-- <img class="ui-datepicker-trigger" src="images/calendar.png" alt="..." title="..."> -->
                                             </div>
                                         </div>
                                         <div class="f-item one-half">
@@ -173,10 +153,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!--//column-->
-                    
-                        <!--column-->
+                        </div> 
                         <div class="column one-third">
                             <h5><span>04</span> Who?</h5>
                             <div class="row">
@@ -198,17 +175,16 @@
                                 </div>
                             </div>
                         </div>
-                        <!--//column-->
-                    </div>  
-                    <!--//form rent a car-->
+                    </div> 
                 </div>
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="submit" value="Proceed to results" class="gradient-button search-submit" id="search-submit" />
             </div>
         </form>
     </div>
-</div>
+</div> -->
 <!--//search-->
+
 @endsection
 
 @section('js')

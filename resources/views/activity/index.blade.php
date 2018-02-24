@@ -14,7 +14,21 @@
                     <div class="static-content index">
                         <div class="row">
                             <h1>Activity</h1>
+
+                            <div class="search-body">
+                                <!--search-->
+                                <div class="search">
+                                    <form id="search-form" method="post" action="searchform">
+                                        <input type="search" placeholder="Search entire site here" name="site_search" id="site_search" />
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}"> 
+                                        <input type="submit" id="submit-site-search" value="submit-site-search" name="submit-site-search"/>
+                                    </form>
+                                </div>
+                                <!--//search-->
+                            </div>
+                            
                             @foreach( $activities as $item )
+                            @if($item->destroy != 0)
                             <!--deal-->
                             <article class="one-fourth" id="be">
                                 @foreach( $item->images as $index => $img)
@@ -51,12 +65,21 @@
                                     @if($user != NULL)
                                         @if($user->roles->role_name == "admin")
                                             <a href="/activity/{{$item->id}}/edit" class="edit-button">Edit</a>
+
+                        <form action="/activity/{{$item->id}}" method="post" enctype="multipart/form-data">
+
+                                            <input id="delete-button" type="submit" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                        </form>
+
                                         @endif
                                     @endif
 
                                 </div>
                             </article>
                             <!--//deal-->
+                            @endif
                             @endforeach
                             @if($user != NULL)
                                 @if($user->roles->role_name == "admin")

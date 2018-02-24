@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="full-width">
                     <h3>Bookings</h3>
-                    <table id="customers" style="text-align: center;">
+                    <table id="customers" style="text-align: center;"><!-- #0077c2 -->
                     <tr>
                         <th style="text-align: center;">Order</th>
                         <th style="text-align: center;">Packet</th>
@@ -38,7 +38,9 @@
                     @else
                     <tr>
                         <td>{{$index+1}}</td>
-                        <td>{{$book->shuttle->pick_up}} => {{$book->shuttle->drop_off}}</td>
+                        <td>{{$book->shuttle->pick_up}} => {{$book->shuttle->drop_off}} 
+                            ({{$book->shuttle->userqu['user_name']}})
+                        </td>
                         <td>{{$book->created_at}}</td>
                         <form action="/booking/{{$book->id}}" method="POST">
                         <td>
@@ -77,7 +79,10 @@
                             <input type="hidden" name="booking_status" value="Confirm">
                             <input type="hidden" name="_method" value="PUT">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <td><input type="submit" name="" value="Confirm"></td>
+                            <td>
+                                <input type="submit" name="" value="Confirm">
+                                <input id="delete-button" type="submit" name="_method" value="DELETE">
+                            </td>
                         </form>
                     </tr>
                     @endif

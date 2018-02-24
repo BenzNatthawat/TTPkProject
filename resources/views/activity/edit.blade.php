@@ -15,7 +15,7 @@
                         <!--deal-->
                     	<article class="two-third">
                             <div class="static-content create"> 
-                            <form action="/activity" method="post" enctype="multipart/form-data">
+                            <form action="/activity/{{$activities->id}}" method="post" enctype="multipart/form-data">
                                 <h2>Edit Activity:<span>{{$activities->activity_name}}</span></h2>
 
                                 <div class="full-width">

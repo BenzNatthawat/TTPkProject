@@ -7,6 +7,8 @@ use App\Models\Shuttle;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\Booking;
+use Cookie;
+use App\User;
 
 class ReservationController extends Controller
 {
@@ -48,7 +50,7 @@ class ReservationController extends Controller
                 // "round" => "required|max:20|min:3",
                 "first_name" => "required|max:20|min:3",
                 "last_name" => "required|max:20|min:3",
-                "email" => "required|max:20|min:5|email",
+                "email" => "required|min:5|email",
                 "telephone" => "required|digits:10",
                 "town_city" => "required|max:20|min:5",
                 "country" => "required|max:20|min:5",
@@ -74,7 +76,21 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
+        $numdri = User::all()->where('roles_id','like',3)->count();
+        $queue = Shuttle::orderBy('id','desc')->get();
+        // dd($queue[0]->userqu->queue);
+        
         if($request->radio === 'form1'){
+            $queuedri = $queue[0]->userqu->queue+1;
+            if($numdri >= $queuedri){
+                $queuedri = $queuedri;
+            }
+            else{
+                $queuedri = 1;
+            }
+            $queunumdri = User::orderBy('id','desc')->where('queue','like',$queuedri)->get();
+            // dd($queunumdri[0]->id);
+            $request['users_id'] = $queunumdri[0]->id;
             Shuttle::create( $request->all() );
             $shuttleid = Shuttle::all()->last();
         }

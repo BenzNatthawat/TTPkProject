@@ -15,6 +15,7 @@ Route::get('/', function () {
 });
 
 Route::resource('/activity','ActivityController');
+Route::post('/searchform','ActivityController@searchform');
 
 Route::resource('/package','PackageController');
 
