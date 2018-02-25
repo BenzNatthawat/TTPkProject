@@ -103,7 +103,7 @@ function getDataFromDb()
     });
 
 }
-setInterval(getDataFromDb, 3000);   // 1000 = 1 second
+setInterval(getDataFromDb, 5000);   // 1000 = 1 second
 function initialize() {
   GGM=new Object(google.maps); // เก็บตัวแปร google.maps Object ไว้ในตัวแปร GGM  
   if(navigator.geolocation){    

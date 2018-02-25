@@ -61,7 +61,7 @@
                             <li><a href="/activity" title="activity">activity</a></li>
                         </ul>
                     </li> -->
-                    <li><a class="manufont" href="#" title="Contact">Contact</a></li>
+                    <li><a class="manufont" href="/contact" title="Contact">Contact</a></li>
                     @guest
                         <li style="float:right">
                             <a class="manufont" href="{{ route('login') }}"><span class="material-icons" style="font-size:20px;">person</span> Login</a>
@@ -75,7 +75,7 @@
                                 <li><a href="/account">My Account</a></li>
                                 <li><a href="/booking">Open Booking</a></li>
                                 <li><a href="/positions">position</a></li>
-                                <li><a href="#">Setting</a></li>
+                                <!-- <li><a href="#">Setting</a></li> -->
                                 <li><a href="{{ route('logout') }}" 
                                     onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">

@@ -41,11 +41,15 @@ Route::get('/home', function () {
     return view('home');
 });
 
-Route::get('/positions','BookingController@position');
+Route::get('/positions','BookingAtivityController@position');
 Auth::routes();
 
 Route::get('/test', function () {
     return view('test');
+});
+
+Route::get('/contact', function () {
+    return view('company.contact');
 });
 
 Route::get('/getData', function () {
