@@ -71,13 +71,11 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 function getDataFromDb()
 {
-    var data = {
-      "action": "4"
-    };
     $.ajax({ 
-        url: "getData" ,
-        type: "get",
-        data: {users_id: 4}
+        type:'POST',
+        url:'getData.php',
+        dataType: "json",
+        data:{user_id:1}
     })
     .success(function(result) { 
         var obj = jQuery.parseJSON(result);

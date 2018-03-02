@@ -1,7 +1,8 @@
 <?php
+	if(empty($_POST['user_id'])){
 	$objConnect = mysqli_connect("localhost","root","", "ttpk") or die(mysql_error());
-	$age = $_GET['users_id'];
-	$strSQL = "SELECT * FROM maps WHERE users_id = 4";
+	$user_id = $_POST['user_id'];
+	$strSQL = "SELECT * FROM maps WHERE users_id = '$user_id'";
 	$objQuery = mysqli_query($objConnect, $strSQL) or die (mysql_error());
 	$intNumField = mysqli_num_fields($objQuery);
 
@@ -12,5 +13,6 @@
 	}
 	mysqli_close($objConnect);
 	echo json_encode($result);
+	}
 
 ?>
