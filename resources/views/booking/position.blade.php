@@ -44,7 +44,7 @@
                                 <input type="submit" name="button" id="button" value="บันทึก" />    
                                 </form> 
                             </div>
-                               
+
                             </div>
                         </div>
                     </div>
@@ -66,30 +66,21 @@ var GGM; // กำหนดตัวแปร GGM ไว้เก็บ google.m
 var my_Marker;  // กำหนดตัวแปรเก็บ marker ตำแหน่งปัจจุบัน หรือที่ระบุ 
 var drlat = {!! $user->maps->latitude or 0 !!};
 var drlng = {!! $user->maps->longitude or 0 !!}
+var userid = {!! $user->maps->users_id or 0 !!}
 var positionx={lat: drlat, lng: drlng}
 google.maps.event.addDomListener(window, 'load', initialize);
-
 function getDataFromDb()
 {
     $.ajax({ 
-        type:'POST',
-        url:'getData.php',
-        dataType: "json",
-        data:{user_id:1}
+        type:'GET',
+        url:'getData',
+        data:{user_id:userid}
     })
     .success(function(result) { 
         var obj = jQuery.parseJSON(result);
             if(obj != '')
-            {
-                  //$("#myTable tbody tr:not(:first-child)").remove();
-                  $("#myBody").empty();
+            {   
                   $.each(obj, function(key, val) {
-                            var tr = "<tr>";
-                            tr = tr + "<td>" + val["location_name"] + "</td>";
-                            tr = tr + "<td>" + val["latitude"] + "</td>";
-                            tr = tr + "<td>" + val["longitude"] + "</td>";
-                            tr = tr + "</tr>";
-                            $('#myTable > tbody:last').append(tr);
                         var xx = document.getElementById("drilat_value");
                         var xy = document.getElementById("drilon_value");
                         xx.value = val["latitude"];
@@ -101,7 +92,7 @@ function getDataFromDb()
     });
 
 }
-setInterval(getDataFromDb, 5000);   // 1000 = 1 second
+setInterval(getDataFromDb, 3000);   // 1000 = 1 second
 function initialize() {
   GGM=new Object(google.maps); // เก็บตัวแปร google.maps Object ไว้ในตัวแปร GGM  
   if(navigator.geolocation){    

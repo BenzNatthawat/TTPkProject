@@ -27,11 +27,13 @@
                         <td>{{$index+1}}</td>
                         <td>{{$book->activity->activity_name}}</td>
                         <td>{{$book->created_at}}</td>
-                        <form action="/BookingActivity/{{$book->id}}" method="POST">
                         <td>
+                            <a href="BookingActivity/{{$book->id}}">
                             <input type="submit" name="" value="{{$book->booking_status}}">
+                            </a>
                         </td>
                         <td>
+                        <form action="/BookingActivity/{{$book->id}}" method="POST">
                             <input class="edit-button" type="button" name="" value="Edit">
                             <input id="delete-button" type="submit" name="_method" value="DELETE">
                         </td>
@@ -45,11 +47,13 @@
                             ({{$book->shuttle->userqu['user_name']}})
                         </td>
                         <td>{{$book->created_at}}</td>
-                        <form action="/BookingActivity/{{$book->id}}" method="POST">
                         <td>
+                            <a href="reservation/{{$book->id}}">
                             <input type="submit" name="" value="{{$book->booking_status}}">
+                            </a>
                         </td>
                         <td>
+                        <form action="/reservation/{{$book->id}}" method="POST">
                             <input class="edit-button" type="button" name="" value="Edit">
                             <input id="delete-button" type="submit" name="_method" value="DELETE">
                         </td>
@@ -61,11 +65,13 @@
                         <td>{{$index+1}}</td>
                         <td>{{$book->package->package_name}}</td>
                         <td>{{$book->created_at}}</td>
-                        <form action="/BookingActivity/{{$book->id}}" method="POST">
                         <td>
+                            <a href="BookingPackage/{{$book->id}}">
                             <input type="submit" name="" value="{{$book->booking_status}}">
+                            </a>
                         </td>
                         <td>
+                        <form action="/BookingPackage/{{$book->id}}" method="POST">
                             <input class="edit-button" type="button" name="" value="Edit">
                             <input id="delete-button" type="submit" name="_method" value="DELETE">
                         </td>

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
+
+
 use App\Http\Controllers\Controller;
 use App\Models\Shuttle;
 use Illuminate\Http\Request;
@@ -89,8 +92,23 @@ class ReservationController extends Controller
                 $queuedri = 1;
             }
             $queunumdri = User::orderBy('id','desc')->where('queue','like',$queuedri)->get();
-            // dd($queunumdri[0]->id);
             $request['users_id'] = $queunumdri[0]->id;
+            // dd($queunumdri[0]->shuffles);
+            foreach ($queunumdri[0]->shuffles as $index => $drishuffle) {
+                if($drishuffle->depart_date === $request->depart_date){
+                    $queuedri++;
+                    if($numdri >= $queuedri){
+                        $queuedri = $queuedri;
+                    }
+                    else{
+                        $queuedri = 1;
+                    }
+                    break;
+                }
+            }
+            $queunumdri = User::orderBy('id','desc')->where('queue','like',$queuedri)->get();
+            $request['users_id'] = $queunumdri[0]->id;
+            // dd($queunumdri[0]->shuffles[0]  );
             Shuttle::create( $request->all() );
             $shuttleid = Shuttle::all()->last();
         }
@@ -111,7 +129,12 @@ class ReservationController extends Controller
      */
     public function show($id)
     {
-        //
+        $Book = Booking::findOrFail($id);
+        if($Book->users[0]->id === Auth::user()->id){
+            return view('booking.editdelect.editreservation')->with('Book', $Book);
+            // dd($Book);
+        }
+        echo("benz");
     }
 
     /**
@@ -145,6 +168,9 @@ class ReservationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $book = Booking::findOrFail($id);
+        $book->users()->sync([]);
+        $book->delete();
+        return redirect('/booking');
     }
 }

@@ -1,5 +1,16 @@
 /* TEMPLATE STYLES
 ====================================================================== */
+
+/*tabcolor*/
+.w3-tag{background-color:#000;color:#fff;display:inline-block;padding-left:8px;padding-right:8px;text-align:center}
+.w3-round{border-radius:4px}
+.w3-green{color:#fff!important;background-color:#4CAF50!important}
+.w3-deep-orange{color:#fff!important;background-color:#ff5722!important}
+.w3-yellow{color:#000!important;background-color:#ffeb3b!important}
+.w3-border{border:1px solid #ccc!important}
+.w3-border-white{border-color:#fff!important}
+.detailstable{text-align:center;float:left;display:block;position:relative;background:#fff;padding:15px 15px 15px;width:100%;-webkit-box-shadow:0 0 2px rgba(0, 0, 0, 0.1);-moz-box-shadow:0 0 2px rgba(0, 0, 0, 0.1);box-shadow:0 0 2px rgba(0, 0, 0, 0.1);}
+
 #customers {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;

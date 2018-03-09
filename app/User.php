@@ -35,4 +35,8 @@ class User extends Authenticatable
     public function maps(){
         return $this->hasOne('App\Models\Map', 'users_id');
     }
+
+    public function shuffles(){
+        return $this->hasMany('App\Models\Shuttle', 'users_id', 'id');
+    }
 }

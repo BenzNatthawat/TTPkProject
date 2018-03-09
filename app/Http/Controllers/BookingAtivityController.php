@@ -77,8 +77,6 @@ class BookingAtivityController extends Controller
      */
     public function store(Request $request)
     {
-
-        $user = Auth::user();
         Booking::create( $request->all() );
         $bookid = Booking::all()->last();
         $bookid->users()->sync(Auth()->user()->id);
@@ -93,7 +91,13 @@ class BookingAtivityController extends Controller
      */
     public function show($id)
     {
-        //
+        $Book = Booking::findOrFail($id);
+        if($Book->users[0]->id === Auth::user()->id){
+            return view('booking.editdelect.editactivity')->with('Book', $Book);
+            // dd($Book);
+        }
+        echo("benz");
+        // dd($Book[0]);
     }
 
     /**

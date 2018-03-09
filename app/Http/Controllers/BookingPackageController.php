@@ -79,7 +79,13 @@ class BookingPackageController extends Controller
      */
     public function show($id)
     {
-        //
+        $Book = Booking::findOrFail($id);
+        if($Book->users[0]->id === Auth::user()->id){
+            return view('booking.editdelect.editpackage')->with('Book', $Book);
+            // dd($Book);
+        }
+        echo("benz");
+        // dd($Book[0]);
     }
 
     /**
@@ -113,6 +119,9 @@ class BookingPackageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $book = Booking::findOrFail($id);
+        $book->users()->sync([]);
+        $book->delete();
+        return redirect('/booking');
     }
 }
