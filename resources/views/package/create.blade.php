@@ -15,7 +15,7 @@
                         <!--deal-->
                     	<article class="two-third">
                             <div class="static-content create"> 
-                            <form action="/package" method="post" enctype="multipart/form-data">
+                            <form action="/packet" method="post" enctype="multipart/form-data">
                                 <h1>Create package</h1>
 
                                 <div class="full-width">

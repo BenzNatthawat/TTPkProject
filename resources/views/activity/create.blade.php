@@ -3,7 +3,25 @@
 @section('title', 'Travel Transport Phuket')
 
 @section('content')
-
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 400px;
+        width: 80%;
+      }
+      #floating-panel {
+        width: 40%;
+        position: static;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        margin-left: 30%;
+      }
+    </style>
 	<!--main-->
     <main class="main">
         <div class="wrap">
@@ -49,6 +67,23 @@
                                     <input id="timepicker2" type="text" name="take_time" placeholder="take_time">
                                 </div>
 
+                                <div class="full-width" id="floating-panel">
+                                    <input name="location_name" id="address" type="text" value="ภูเก็ต">
+                                    <input class="gradient-button" style="margin-top: 5px;" type="button" id="myBtn" value="search"> 
+                                </div>
+
+                                <div style="margin-left: 10%;" id="map"></div>
+
+                                <div class="one-half">
+                                    <label for="latitude">latitude</label>
+                                    <input type="text" id="lati" name="latitude">
+                                </div>
+
+                                <div class="one-half">
+                                    <label for="longitude">longitude</label>
+                                    <input type="text" id="lngi" name="longitude">
+                                </div>
+
 								<div class="full-width">
 									<label for="Multiple selection">Multiple selection</label>
 									<input  type="file" name="files[]" multiple="multiple">
@@ -58,6 +93,8 @@
                                 <div class="full-width">
 								    <input type="submit" value="Submit">
                                 </div>
+
+
 							</form>
                         </div>
                         </article>
@@ -70,7 +107,7 @@
             </div>
         </div>
     </main>
-    <!--//main-->
+    <!--//main-->                 
 
 @endsection
 
@@ -107,49 +144,7 @@
             });
         })(jQuery);
     </script>
-    <script type="text/javascript">
-    function initMap() {
-        
-        var position={lat: 13.7563309, lng: 100.5017651}
 
-        var MapOptions = {
-             zoom: 10
-            ,center: position
-        };
-        var MyMap = new google.maps.Map(document.getElementById("map_canvas"), MapOptions);
-
-
-        var marker = new google.maps.Marker({
-            map: MyMap,
-            draggable: true,
-            position: new google.maps.LatLng(49.47216, -123.76307),
-            visible: true
-        });
-
-        var boxText = document.createElement("div");
-        boxText.innerHTML = "<strong>Best ipsum hotel</strong>1400 PennsylSUVia Ave,Washington DCwww.bestipsumhotel.com";
-
-        var myOptions = {
-             content: boxText
-            ,disableAutoPan: false
-            ,maxWidth: 0
-            ,pixelOffset: new google.maps.Size(-140, 0)
-            ,zIndex: null
-            ,closeBoxURL: ""
-            ,infoBoxClearance: new google.maps.Size(1, 1)
-            ,isHidden: false
-            ,pane: "floatPane"
-            ,enableEventPropagation: false
-        };
-
-        google.maps.event.addListener(marker, "click", function (e) {
-            ib.open(MyMap, this);
-        });
-
-        var ib = new InfoBox(myOptions);
-        ib.open(MyMap, marker);
-    }
-    </script>
     <script type="text/javascript">
          $(document).ready(function() {
             $('#image-gallery').lightSlider({
@@ -170,4 +165,59 @@
             });
         });
     </script>
+
+    <script>
+      var map;
+      var position = {lat: 7.95193, lng: 98.33808}
+      var step = 0;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: position,
+          zoom: 12
+        });
+
+        var geocoder = new google.maps.Geocoder();
+
+        document.getElementById('myBtn').addEventListener('click', function() {
+            geocodeAddress(geocoder, map);
+        });
+
+      }
+
+      function geocodeAddress(geocoder, resultsMap){
+        var address = document.getElementById('address').value;
+        geocoder.geocode({'address': address}, function(results, status) {
+          if (status === 'OK') {
+            resultsMap.setCenter(results[0].geometry.location);
+              var lat = results[0].geometry.location.lat();
+              var lng = results[0].geometry.location.lng();
+              document.getElementById("lati").value = lat;
+              document.getElementById("lngi").value = lng;
+            if(step == 0){
+                var marker = new google.maps.Marker({
+                    map: resultsMap,
+                    position: results[0].geometry.location,
+                    draggable:true,
+                });
+                step = 1;
+            }
+            else{
+                marker.google.maps.Marker({
+                    map: resultsMap,
+                    position: results[0].geometry.location,
+                    draggable:true,
+                })
+            }
+            marker.addListener('drag', function(){
+              document.getElementById("lati").value = marker.getPosition().lat();
+              document.getElementById("lngi").value = marker.getPosition().lng();
+            });
+          } else {
+            alert('Noooo!!!!!' + status);
+          }
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhbRYJJIdx5t-FbQBg_Ra9wXcQ7Z9RMgg&callback=initMap"
+    async defer></script>
 @endsection

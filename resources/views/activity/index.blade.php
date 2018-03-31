@@ -32,7 +32,7 @@
                             <!--deal-->
                             <article class="one-fourth" id="be">
                                 @foreach( $item->images as $index => $img)
-                                @if($img->activities_id == $item->id && $index == 1)
+                                @if($img->activities_id == $item->id && $index == 0)
                                     <figure><a href="activity/{{$item->id}}" title=""><img style="width: 900px; height: 180px;" src="img/{{$img->image_name}}" alt="{{$item->activity_name}}" /></a></figure>
                                 @endif
                                 @endforeach 

@@ -18,9 +18,20 @@
 						<div>
 							score
 							<span class="stars">
-								<i class="material-icons"></i>
-								<i class="material-icons"></i>
-								<i class="material-icons"></i>
+								<?php
+                                    $Excellent = $packages->reviews->where('score_review', 'Excellent')->count();
+                                    $Verygood = $packages->reviews->where('score_review', 'Very good')->count();
+                                    $Average = $packages->reviews->where('score_review', 'Average')->count();
+                                    $Poor = $packages->reviews->where('score_review', 'Poor')->count();
+                                    $Terrible = $packages->reviews->where('score_review', 'Terrible')->count();
+                                    $sum = $packages->reviews->count();
+                                    $sum!=0?$sum:$sum=1;
+                                    $score = round(($Excellent*1+$Verygood*0.8+$Average*0.6+$Poor*0.4+$Terrible*0.2)/$sum*4,0);
+                                ?>
+
+                                @for($i=0; $i<=$score; $i++)
+                                <i class="material-icons"></i>
+                                @endfor
 							</span>
 						</div>
 					</article>
@@ -91,7 +102,7 @@
                                     </tr>
                                 </table>
 							</div>
-							<a style="float:right" href="/booking/{{$packages->id}}/create/1" title="Book" class="gradient-button">Book now</a>
+							<a style="float:right" href="/BookingPackage/{{$packages->id}}/create/1" title="Book" class="gradient-button">Book now</a>
 						</article>
 					</section>
 					<!--//ticketprice-->

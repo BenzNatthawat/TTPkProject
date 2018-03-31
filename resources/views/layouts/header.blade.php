@@ -54,7 +54,7 @@
                 <ul class="slimmenu" id="nav">
                     <li><a class="manufont" href="/home" title="Home">Home</a></li>
                     <li><a class="manufont" href="/activity" title="activity">activity</a></li>
-                    <li><a class="manufont" href="/package" title="package">package</a></li>
+                    <li><a class="manufont" href="/packet" title="packet">packet</a></li>
                     <li><a class="manufont" href="/reservation" title="shuttle">shuttle</a></li>
 <!--                     <li class="has-submenu"><a class="manufont" href="#" title="Pages">Pages</a>
                         <ul style="display: none;">
@@ -70,10 +70,27 @@
                             <a class="manufont" href="{{ route('register') }}"><span class="material-icons" style="font-size:20px;">person_add</span> Register</a>
                         </li>
                     @else
-                        <li style="float:right"><a href="#" title="Pages" class="manufont">{{ Auth::user()->user_name }} {{ Auth::user()->roles->role_name }}</a>
+                        <li style="float:right">
+                            <a href="#" title="Pages" class="manufont">{{ Auth::user()->user_name }} {{ Auth::user()->roles->role_name }}
+                                <span style="float: right; font-size: 5px;" class="w3-badge w3-red">    
+                                            <!-- {{count(Auth::user()->bookings)}} -->
+                                            @if(count(Auth::user()->bookings) > 0)
+                                            {{count(Auth::user()->bookings)}}
+                                            @endif
+                                </span>
+                            </a>
                             <ul style="display: none;">
                                 <li><a href="/account">My Account</a></li>
-                                <li><a href="/booking">Open Booking</a></li>
+                                <li>
+                                    <a href="/booking">Open Booking
+                                        <span style="float: right;" class="w3-badge w3-red">    
+                                            <!-- {{count(Auth::user()->bookings)}} -->
+                                            @if(count(Auth::user()->bookings) > 0)
+                                            {{count(Auth::user()->bookings)}}
+                                            @endif
+                                        </span>
+                                    </a>
+                                </li>
                                 <li><a href="/positions">position</a></li>
                                 <!-- <li><a href="#">Setting</a></li> -->
                                 <li><a href="{{ route('logout') }}" 

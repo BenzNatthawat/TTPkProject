@@ -14,10 +14,14 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/home', function () {
+    return view('home');
+});
+
 Route::resource('/activity','ActivityController');
 Route::post('/searchform','ActivityController@searchform');
 
-Route::resource('/package','PackageController');
+Route::resource('/packet','PackageController');
 
 Route::get('/booking','BookingAtivityController@index');
 
@@ -37,10 +41,6 @@ Route::post('/reservation/create/{id_book}','ReservationController@create');
 
 Route::post('/postreview/{id_activity}','ActivityController@postreview');
 
-Route::get('/home', function () {
-    return view('home');
-});
-
 Route::get('/positions','BookingAtivityController@position');
 Auth::routes();
 
@@ -59,5 +59,7 @@ Route::get('/getData', function () {
 Route::get('/postData', function () {
     return view('json.postData');
 });
+
+Route::get('/pay','Payment@pay');
 
 //Route::get('/home', 'HomeController@index')->name('home');

@@ -9,13 +9,14 @@ use Auth;
 use Input as Input;
 use App\Models\Image;
 use App\Models\Review;
+use App\Models\Map;
 
 
 class ActivityController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only('create');
+        $this->middleware('auth');
     }
     
     /**
@@ -61,7 +62,12 @@ class ActivityController extends Controller
     public function store(Request $request)
     {
         Activity::create( $request->all() );
-        $imgid = Activity::all()->last();
+        $id = Activity::all()->last();
+        Map::create( $request->all() );
+        $map = Map::all()->last();
+        $map->activities_id = $id->id;
+        $map->save();
+
         if(Input::hasFile('files')){
             foreach(Input::file('files') as $file){
                 $imageName = rand();
@@ -77,9 +83,9 @@ class ActivityController extends Controller
                 $file->move(base_path() . '/public/img/', $nameimg);
                 $img = new Image;
                 $img->image_name = $nameimg;
-                $img->activities_id = $imgid->id;
+                $img->activities_id = $id->id;
                 $img->save();
-                echo base_path();
+                // echo base_path();
             }
         }
 

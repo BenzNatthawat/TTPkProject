@@ -62,7 +62,7 @@ p,blockquote {padding:0 0 20px;}
 #customers tr:nth-child(odd){background: #FFF;}
 #customers tr:hover {background: #ddd;}
 
-table                   {border-collapse:collapse;border-spacing:0;width:100%;margin:0 0 30px;}
+table                   {border-collapse:collapse;border-spacing:0;width:100%;margin:0 0 0px;}
 table th                {border:1px solid #ccc;padding:0px;text-align:left;font-size:13px;vertical-align:top;}
 table td                {border:1px solid #ccc;color:#454545;padding:0px;}
 table p                 {padding:0;}

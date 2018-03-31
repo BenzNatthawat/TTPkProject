@@ -40,9 +40,20 @@
 						<div>
 							score
 							<span class="stars">
+								<?php
+									$Excellent = $activities->reviews->where('score_review', 'Excellent')->count();
+									$Verygood = $activities->reviews->where('score_review', 'Very good')->count();
+									$Average = $activities->reviews->where('score_review', 'Average')->count();
+									$Poor = $activities->reviews->where('score_review', 'Poor')->count();
+									$Terrible = $activities->reviews->where('score_review', 'Terrible')->count();
+									$sum = $activities->reviews->count();
+									$sum!=0?$sum:$sum=1;
+									$score = round(($Excellent*1+$Verygood*0.8+$Average*0.6+$Poor*0.4+$Terrible*0.2)/$sum*4,0);
+								?>
+
+								@for($i=0; $i<=$score; $i++)
 								<i class="material-icons"></i>
-								<i class="material-icons"></i>
-								<i class="material-icons"></i>
+								@endfor
 							</span>
 						</div>
 					</article>
@@ -104,20 +115,20 @@
 							<div class="activity-types">
 								<table id="customers">
 									<tr>
-									    <th>Generation</th>
-									    <th>Price</th>
+										<th>Generation</th>
+										<th>Price</th>
 									</tr>
-                                    <tr>
-                                        <td>Adult (s)Over 11 Years old</td>
-                                        <td>{{$activities->price_adult}} THB </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Child (s)4 - 11 Years old</td>
-                                        <td>{{$activities->price_child}} THB </td>
-                                    </tr>
-                                </table>
+									<tr>
+										<td>Adult (s)Over 11 Years old</td>
+										<td>{{$activities->price_adult}} THB </td>
+									</tr>
+									<tr>
+										<td>Child (s)4 - 11 Years old</td>
+										<td>{{$activities->price_child}} THB </td>
+									</tr>
+								</table>
 							</div>
-							<a style="float:right" href="/booking/{{$activities->id}}/create/1" title="Book" class="gradient-button">Book now</a>
+							<a style="float:right" href="/BookingActivity/{{$activities->id}}/create/1" title="Book" class="gradient-button">Book now</a>
 						</article>
 					</section>
 					<!--//ticketprice-->
@@ -132,12 +143,12 @@
 							
 							<h2>Opening Time</h2>
 							<div class="text-wrap">	
-								<p>From 9.00 A.M. </p>
+								<p>From {{$activities->start_time}} </p>
 							</div>
 							
 							<h2>Closing Time</h2>
 							<div class="text-wrap">	
-								<p>Untill 17.00 P.M. </p>
+								<p>Untill {{$activities->finish_time}} </p>
 							</div>
 						</article>
 					</section>
@@ -166,8 +177,12 @@
 						<article>
 							<h2>Score Breakdown</h2>
 							<div class="score">
-								<span class="achieved">{{ round(($Excellent*1+$Verygood*0.8+$Average*0.6+$Poor*0.4+$Terrible*0.2)/$sum*10,1)}} </span>
-								<span> / 10</span>
+								<?php $score = round(($Excellent*1+$Verygood*0.8+$Average*0.6+$Poor*0.4+$Terrible*0.2)/$sum*10,1) ?>
+								@if($score == 0)
+									No score
+								@else
+									<span class="achieved">{{$score}} / 10</span>
+								@endif
 								@if($activities->reviews->isEmpty())
 								<p class="info">Based on {{$sum-1}} reviews</p>
 								@else
@@ -211,7 +226,7 @@
 
 								@if($activities->reviews->isEmpty())
 								<li style="text-align: center;">
-									<div>ไม่มีความคิดเห็น</div>
+									<div>No Comments.</div>
 								</li>
 								@else
 								@foreach($activities->reviews as $review)
@@ -237,28 +252,28 @@
 								</div><br>
 								<div style="margin-left: 20px;">
 								<div class="f-item one-full" style="margin-bottom: 10px;">
-		                            <input type="radio" name="score_review" value="Excellent" checked required />
-		                            <label for="Excellent">Excellent</label>
-		                        </div>
-		                        <div class="f-item one-full" style="margin-bottom: 10px;">
-		                            <input type="radio" name="score_review" value="Very good" required/>
-		                            <label for="Very_good">Very good</label>
-		                        </div>
-		                        <div class="f-item one-full" style="margin-bottom: 10px;">
-		                            <input type="radio" name="score_review" value="Average" required/>
-		                            <label for="Average">Average</label>
-		                        </div>
-		                        <div class="f-item one-full" style="margin-bottom: 10px;">
-		                            <input type="radio" name="score_review" value="Poor" required/>
-		                            <label for="Poor">Poor</label>
-		                        </div>
-		                        <div class="f-item one-full" style="margin-bottom: 10px;">
-		                            <input type="radio" name="score_review" value="Terrible" required/>
-		                            <label for="Terrible">Terrible</label>
-		                        </div>
-		                        </div>
+									<input type="radio" name="score_review" value="Excellent" checked required />
+									<label for="Excellent">Excellent</label>
+								</div>
+								<div class="f-item one-full" style="margin-bottom: 10px;">
+									<input type="radio" name="score_review" value="Very good" required/>
+									<label for="Very_good">Very good</label>
+								</div>
+								<div class="f-item one-full" style="margin-bottom: 10px;">
+									<input type="radio" name="score_review" value="Average" required/>
+									<label for="Average">Average</label>
+								</div>
+								<div class="f-item one-full" style="margin-bottom: 10px;">
+									<input type="radio" name="score_review" value="Poor" required/>
+									<label for="Poor">Poor</label>
+								</div>
+								<div class="f-item one-full" style="margin-bottom: 10px;">
+									<input type="radio" name="score_review" value="Terrible" required/>
+									<label for="Terrible">Terrible</label>
+								</div>
+								</div>
 								{{ csrf_field() }}
-		                        <input type="submit" value="Submit">
+								<input type="submit" value="Submit">
 							</form>
 						</article>
 						@endauth
@@ -278,15 +293,15 @@
 @section('js')
 <script>
 function myFunction() {
-    var score_review = document.forms[0];
-    var txt = "";
-    var i;
-    for (i = 0; i < score_review.length; i++) {
-        if (score_review[i].checked) {
-            txt = txt + score_review[i].value + " ";
-        }
-    }
-    document.getElementById("order").value = "You ordered a score with: " + txt;
+	var score_review = document.forms[0];
+	var txt = "";
+	var i;
+	for (i = 0; i < score_review.length; i++) {
+		if (score_review[i].checked) {
+			txt = txt + score_review[i].value + " ";
+		}
+	}
+	document.getElementById("order").value = "You ordered a score with: " + txt;
 }
 </script>
 	<script type="text/javascript">
@@ -334,20 +349,20 @@ function myFunction() {
 	}
 	</script>
 	<script type="text/javascript">
-    	 $(document).ready(function() {
-            $('#image-gallery').lightSlider({
-                gallery:false,
-                item:1,
-                thumbItem:6,
-                slideMargin: 0,
-                speed:500,
-                auto:true,
-                loop:true,
-                pager:false,
-                onSliderLoad: function() {
-                    $('#image-gallery').removeClass('cS-hidden');
-                }  
-            });
+		 $(document).ready(function() {
+			$('#image-gallery').lightSlider({
+				gallery:false,
+				item:1,
+				thumbItem:6,
+				slideMargin: 0,
+				speed:500,
+				auto:true,
+				loop:true,
+				pager:false,
+				onSliderLoad: function() {
+					$('#image-gallery').removeClass('cS-hidden');
+				}  
+			});
 		});
-    </script>
+	</script>
 @endsection

@@ -52,27 +52,63 @@
                                     </tr>
                                     @if($Book->number_adult!=0)
                                     <tr>
-                                        <td>Adult (s):</td>
-                                        <td>{{$Book->number_adult}}</td>
+                                        <td>Adult (s)/{{$Book->activity->price_adult}}:</td>
+                                        <td>{{$Book->number_adult}} <=> {{$Book->number_adult * $Book->activity->price_adult}}฿</td>
                                     </tr>
                                     @endif
                                     @if($Book->number_child!=0)
                                     <tr>
-                                        <td>Child (s):</td>
-                                        <td>{{$Book->number_child}}</td>
+                                        <td>Child (s)/{{$Book->activity->price_child}}:</td>
+                                        <td>{{$Book->number_child}} <=> {{$Book->number_child * $Book->activity->price_child}}฿</td>
                                     </tr>
                                     @endif
                                     @if($Book->number_baby!=0)
                                     <tr>
                                         <td>Infant(s) / Baby(s):</td>
-                                        <td>{{$Book->number_baby}}</td>
+                                        <td>{{$Book->number_baby}} <=> (Free)</td>
                                     </tr>
                                     @endif
                                     <tr>
                                         <td>Travel Date:</td>
                                         <td>{{$Book->booking_date}}</td>
                                     </tr>
+
                                 </table>
+                            </div>
+
+                            <div style="float: right; margin-top: 10px;">
+                                                             
+                                <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                                    <input type="hidden" name="cmd" value="_cart">
+                                    <input type="hidden" name="upload" value="1">
+                                    <input type="hidden" name="currency_code" value="THB">
+                                    <input type="hidden" name="business" value="Travel_Transport_Phuket@mail.com">
+
+                                    <span style="font-size: 2em; color: blue; margin-right: 20px;">
+                                        {{$Book->number_child*$Book->activity->price_child+$Book->number_adult*$Book->activity->price_adult}}THB
+                                    </span>
+                                    
+                                    @if($Book->number_adult!=0)
+                                    <input type="hidden" name="item_name_1" value="Adult(s)/{{$Book->activity->price_adult}}:">
+                                    <input type="hidden" name="amount_1" value="{{$Book->number_adult*$Book->activity->price_adult}}">
+                                    @endif
+
+                                    @if($Book->number_child!=0)
+                                    <input type="hidden" name="item_name_2" value="Child(s)/{{$Book->activity->price_child}}:">
+                                    <input type="hidden" name="amount_2" value="{{$Book->number_child*$Book->activity->price_child}}">
+                                    @endif
+
+                                    @if($Book->number_baby!=0)
+                                    <input type="hidden" name="item_name_3" value="Body(s)/{{$Book->activity->price_baby}}:">
+                                    <input type="hidden" name="amount_3" value="{{$Book->number_baby*$Book->activity->price_baby}}">
+                                    @endif
+
+                                    <input type="hidden" name="return" value="DOMAIN/success.php">
+                                    <input type="hidden" name="cancel_return" value="DOMAIN/cancel.php">
+                                    
+                                    <input class="edit-button" type="submit" value="฿ PAYPAL">
+                                </form>
+                                                                
                             </div>
 
                             <!--//deal-->

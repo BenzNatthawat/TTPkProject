@@ -15,7 +15,7 @@
         position: absolute;
         left: 18%;
         z-index: 5;
-        margin-top: -20px;
+        margin-top: -80px;
         background-color: #fff;
         padding: 5px;
         border: 1px solid #999;
@@ -26,7 +26,7 @@
         position: absolute;
         right: 18%;
         z-index: 5;
-        margin-top: -20px;
+        margin-top: -80px;
         background-color: #fff;
         padding: 5px;
         border: 1px solid #999;
@@ -74,7 +74,7 @@
                                 <div id="embed_button">
                                     <input type="submit" name="Submit" value="open map" onclick="JavaScript:fncShow('embed_div');">
                                 </div>
-                                <div id="embed_div" style="display:none; ">
+                                <div id="embed_div" style="display:none; margin-top:60px">
                                     <div class="full-width">
                                         <div id="floating-panel1">
                                             <input id="address1" type="text" placeholder="search Where the place that pick up">
@@ -206,7 +206,7 @@
 
     <script>
       var map;
-      var position={lat: 7.95193, lng: 98.33808}
+      var position = {lat: 7.95193, lng: 98.33808}
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
           center: position,

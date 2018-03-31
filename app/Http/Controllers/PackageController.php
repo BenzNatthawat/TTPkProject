@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Activity;
 use App\Models\Packagesservice;
-use App\Models\packageservices_has_activity;
 use Input as Input;
 use Auth;
 
@@ -44,6 +43,7 @@ class PackageController extends Controller
         return view('package.create')   ->with('page',$page)
                                         ->with('pagenum',$pagenum)
                                         ->with('activities',$activities);
+        echo "string";
     }
 
     /**
@@ -58,12 +58,9 @@ class PackageController extends Controller
         $packageid = Packagesservice::all()->last();
 
         foreach ($request->packages as $package) {
-            $has_activities = new packageservices_has_activity;
-            $has_activities->packageservices_id = $packageid->id;
-            $has_activities->activities_id = $package;
-            $has_activities->save();
+            $packageid->activities()->sync($package);
         }
-        return redirect('/package');
+        return redirect('/packet');
     }
 
     /**
@@ -86,7 +83,8 @@ class PackageController extends Controller
      */
     public function edit($id)
     {
-        //
+        $packages = Packagesservice::findOrFail($id);
+        return view('package.edit')    ->with('packages',$packages);
     }
 
     /**

@@ -2,10 +2,11 @@
 ====================================================================== */
 
 /*tabcolor*/
-.w3-tag{background-color:#000;color:#fff;display:inline-block;padding-left:8px;padding-right:8px;text-align:center}
+.w3-badge,.w3-tag{background-color:#000;color:#fff;display:inline-block;padding-left:8px;padding-right:8px;text-align:center}.w3-badge{border-radius:50%}
 .w3-round{border-radius:4px}
 .w3-green{color:#fff!important;background-color:#4CAF50!important}
 .w3-deep-orange{color:#fff!important;background-color:#ff5722!important}
+.w3-red{color:#fff!important;background-color:#d30d00!important}
 .w3-yellow{color:#000!important;background-color:#ffeb3b!important}
 .w3-border{border:1px solid #ccc!important}
 .w3-border-white{border-color:#fff!important}
