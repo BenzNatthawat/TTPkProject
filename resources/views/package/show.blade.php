@@ -98,7 +98,7 @@
 									</tr>
                                     <tr>
                                         <td>Adult (s)Over 11 Years old</td>
-                                        <td>{{$packages->price_package}} THB </td>
+                                        <td>{{$packages->price_packet}} THB </td>
                                     </tr>
                                 </table>
 							</div>
@@ -151,23 +151,31 @@
 						<article>
 							<h2>Score Breakdown</h2>
 							<div class="score">
-								<span class="achieved">8 </span>
-								<span> / 10</span>
-								<p class="info">Based on 782 reviews</p>
+								<?php $score = round(($Excellent*1+$Verygood*0.8+$Average*0.6+$Poor*0.4+$Terrible*0.2)/$sum*10,1) ?>
+								@if($score == 0)
+									No score
+								@else
+									<span class="achieved">{{$score}} / 10</span>
+								@endif
+								@if($packages->reviews->isEmpty())
+								<p class="info">Based on {{$sum-1}} reviews</p>
+								@else
+								<p class="info">Based on {{$sum}} reviews</p>
+								@endif
 								<p class="disclaimer">reviews are written by our customers.
 							</div>
 							
 							<dl class="chart">
 								<dt>Excellent</dt>
-								<dd><span id="data-one" style="width:80%;">8</span></dd>
+								<dd><span id="data-one" style="width:{{$Excellent/$sum*100}}%;">{{$Excellent}}</span></dd>
 								<dt>Very good</dt>
-								<dd><span id="data-two" style="width:60%;">6</span></dd>
+								<dd><span id="data-two" style="width:{{$Verygood/$sum*100}}%;">{{$Verygood}}</span></dd>
 								<dt>Average</dt>
-								<dd><span id="data-three" style="width:80%;">8</span></dd>
+								<dd><span id="data-three" style="width:{{$Average/$sum*100}}%;">{{$Average}}</span></dd>
 								<dt>Poor </dt>
-								<dd><span id="data-four" style="width:100%;">10</span></dd>
+								<dd><span id="data-four" style="width:{{$Poor/$sum*100}}%;">{{$Poor}}</span></dd>
 								<dt>Terrible </dt>
-								<dd><span id="data-five" style="width:70%;">7</span></dd>
+								<dd><span id="data-five" style="width:{{$Terrible/$sum*100}}%;">{{$Terrible}}</span></dd>
 							</dl>
 						</article>
 						
@@ -175,26 +183,60 @@
 							<h2>Reviews</h2>
 							<ul class="reviews">
 								<!--review-->
-								<li>
-									<figure class="left">
-										<img src="#" alt="avatar">
-										<address><span>Anonymous</span><br><br>22/06/2016</address>
-									</figure>
-									<div>สวยงามและสนุกมาก</div>
+								@if($packages->reviews->isEmpty())
+								<li style="text-align: center;">
+									<div>No Comments.</div>
 								</li>
-								<!--//review-->
-								
+								@else
+								@foreach($packages->reviews as $review)
 								<!--review-->
 								<li>
 									<figure class="left">
-										<img src="#" alt="avatar">
-										<address><span>Anonymous</span><br><br>22/06/2016</address>
+										<img src="../images/avatar.jpg" alt="avatar">
+										<address><span>{{$review->user->first_name or $review->user->user_name}}</span><br><br>{{$review->created_at}}</address>
 									</figure>
-									<div>สวยงามมาก สดชื้น</div>
+									<div>{{$review->review}}</div>
 								</li>
 								<!--//review-->
+								@endforeach
+								@endif
 							</ul>
 						</article>
+
+						@auth
+						<article>
+							<form action="/packet/postreview/{{$id}}" method="post" enctype="multipart/form-data">
+								<div>
+									<textarea name="review" placeholder="Add Reviews"></textarea>
+								</div><br>
+								<div style="margin-left: 20px;">
+								<div class="f-item one-full" style="margin-bottom: 10px;">
+									<input type="radio" name="score_review" value="Excellent" checked required />
+									<label for="Excellent">Excellent</label>
+								</div>
+								<div class="f-item one-full" style="margin-bottom: 10px;">
+									<input type="radio" name="score_review" value="Very good" required/>
+									<label for="Very_good">Very good</label>
+								</div>
+								<div class="f-item one-full" style="margin-bottom: 10px;">
+									<input type="radio" name="score_review" value="Average" required/>
+									<label for="Average">Average</label>
+								</div>
+								<div class="f-item one-full" style="margin-bottom: 10px;">
+									<input type="radio" name="score_review" value="Poor" required/>
+									<label for="Poor">Poor</label>
+								</div>
+								<div class="f-item one-full" style="margin-bottom: 10px;">
+									<input type="radio" name="score_review" value="Terrible" required/>
+									<label for="Terrible">Terrible</label>
+								</div>
+								</div>
+								{{ csrf_field() }}
+								<input type="submit" value="Submit">
+							</form>
+						</article>
+						@endauth
+
 					</section>
 					<!--//reviews-->
 				</section>

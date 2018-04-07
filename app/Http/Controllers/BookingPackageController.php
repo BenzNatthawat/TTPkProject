@@ -80,12 +80,19 @@ class BookingPackageController extends Controller
     public function show($id)
     {
         $Book = Booking::findOrFail($id);
+        $statusbooking = 2;
+
         if($Book->users[0]->id === Auth::user()->id){
-            return view('booking.editdelect.editpackage')->with('Book', $Book);
+            $total = $Book->number_adult*$Book->package->price_packet+$Book->number_child*$Book->package->price_packet;
+            return view('booking.showbooking')  ->with('Book', $Book)
+                                                ->with('total',$total)
+                                                ->with('statusbooking',$statusbooking);
             // dd($Book);
         }
-        echo("benz");
-        // dd($Book[0]);
+        else{
+            $message = array('head' => 'You do not have role','detail' => $Book);
+            return view('error.dohaverole')->with('message', $message);
+        }
     }
 
     /**

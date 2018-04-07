@@ -13,7 +13,7 @@
                     <!--latest offers-->
                     <div class="row">
                         <!--deal-->
-                    	<article class="two-third">
+                    	<article class="full-width">
                             <div class="static-content create"> 
                             <form action="/packet" method="post" enctype="multipart/form-data">
                                 <h1>Create package</h1>
@@ -23,8 +23,8 @@
     								<input type="text" name="package_name" placeholder="package name">
                                 </div>
                                 <div class="one-half">
-    								<label for="price package">price package</label>
-    								<input type="number" name="price_package" placeholder="price package">
+    								<label for="price package">price packet</label>
+    								<input type="number" name="price_packet" placeholder="price package">
                                 </div>
                                 <div class="full-width">
     								<label for="desciption">desciption</label>

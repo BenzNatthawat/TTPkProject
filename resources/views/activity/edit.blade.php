@@ -35,6 +35,23 @@
     								<textarea name="desciption">{{$activities->desciption}}</textarea>
                                 </div>
 
+                                <div class="full-width" id="floating-panel">
+                                    <input name="location_name" id="address" type="text" value="{{$activities->map_location->location_name or 'Phuket'}}">
+                                    <input class="gradient-button" style="margin-top: 5px;" type="button" id="myBtn" value="search"> 
+                                </div>
+
+                                <div id="map"></div>
+
+                                <div class="one-half">
+                                    <label for="latitude">latitude</label>
+                                    <input type="text" id="lati" name="latitude" value="{{$activities->map_location->latitude or 7.95193}}">
+                                </div>
+
+                                <div class="one-half">
+                                    <label for="longitude">longitude</label>
+                                    <input type="text" id="lngi" name="longitude" value="{{$activities->map_location->longitude or 98.33808}}">
+                                </div>
+
 								<div class="full-width">
 									<label for="Multiple selection">Multiple selection</label>
 									<input  type="file" name="files[]" multiple="multiple">
@@ -76,5 +93,60 @@
         </div>
     </main>
     <!--//main-->
+
+    <script>
+      var map;
+      var position = {lat: 7.95193, lng: 98.33808}
+      var step = 0;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: position,
+          zoom: 12
+        });
+
+        var geocoder = new google.maps.Geocoder();
+
+        document.getElementById('myBtn').addEventListener('click', function() {
+            geocodeAddress(geocoder, map);
+        });
+
+      }
+
+      function geocodeAddress(geocoder, resultsMap){
+        var address = document.getElementById('address').value;
+        geocoder.geocode({'address': address}, function(results, status) {
+          if (status === 'OK') {
+            resultsMap.setCenter(results[0].geometry.location);
+              var lat = results[0].geometry.location.lat();
+              var lng = results[0].geometry.location.lng();
+              document.getElementById("lati").value = lat;
+              document.getElementById("lngi").value = lng;
+            if(step == 0){
+                var marker = new google.maps.Marker({
+                    map: resultsMap,
+                    position: results[0].geometry.location,
+                    draggable:true,
+                });
+                step = 1;
+            }
+            else{
+                marker.google.maps.Marker({
+                    map: resultsMap,
+                    position: results[0].geometry.location,
+                    draggable:true,
+                })
+            }
+            marker.addListener('drag', function(){
+              document.getElementById("lati").value = marker.getPosition().lat();
+              document.getElementById("lngi").value = marker.getPosition().lng();
+            });
+          } else {
+            alert('Noooo!!!!!' + status);
+          }
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhbRYJJIdx5t-FbQBg_Ra9wXcQ7Z9RMgg&callback=initMap"
+    async defer></script>
 
 @endsection

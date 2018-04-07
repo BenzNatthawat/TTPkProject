@@ -12,13 +12,13 @@
                     <div>
                     <h3>Bookings</h3>
                     @if(!$user->bookings->isEmpty())
-                    <table id="customers" style="text-align: center;"><!-- #0077c2 -->
+                    <table id="customers"><!-- #0077c2 -->
                     <tr>
-                        <th style="text-align: center;">Order</th>
-                        <th style="text-align: center;">Packet</th>
-                        <th style="text-align: center;">Date</th>
-                        <th style="text-align: center;">Status</th>
-                        <th style="text-align: center;"> </th>
+                        <th>Order</th>
+                        <th>Packet</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th> </th>
                     </tr>
 
                     @foreach( $user->bookings as $index => $book)
@@ -84,8 +84,8 @@
                     @endforeach
                     </table>
                     @else
-                    <table id="customers" style="text-align: center;">
-                        <th style="text-align: center; background-color: #FF3232">Not Booking</th>
+                    <table id="customers">
+                        <th style="background-color: #FF3232">Not Booking</th>
                     </table>
                     @endif
                     </div>
@@ -98,13 +98,13 @@
 
                     <div>
                     <h3>Booking Shuttles</h3>
-                    <table id="customers" style="text-align: center;">
+                    <table id="customers">
                     <tr>
-                        <th style="text-align: center;">Order</th>
-                        <th style="text-align: center;">Name Booking</th>
-                        <th style="text-align: center;">Date</th>
-                        <th style="text-align: center;">Status</th>
-                        <th style="text-align: center;"></th>
+                        <th>Order</th>
+                        <th>Name Booking</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th></th>
                     </tr>
                     @foreach( $shubookings as $index => $book)
                     <tr>
@@ -130,13 +130,13 @@
                     @if(!$pacbookings->isEmpty())
                     <div>
                     <h3>Booking Activities</h3>
-                    <table id="customers" style="text-align: center;">
+                    <table id="customers">
                     <tr>
-                        <th style="text-align: center;">Order</th>
-                        <th style="text-align: center;">Name Booking</th>
-                        <th style="text-align: center;">Date</th>
-                        <th style="text-align: center;">Status</th>
-                        <th style="text-align: center;"></th>
+                        <th>Order</th>
+                        <th>Name Booking</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th></th>
                     </tr>
                     @foreach( $pacbookings as $index => $book)
                     <tr>
@@ -162,13 +162,13 @@
                     @if(!$actbookings->isEmpty())
                     <div>
                     <h3>Booking Packageservices</h3>
-                    <table id="customers" style="text-align: center;">
+                    <table id="customers">
                     <tr>
-                        <th style="text-align: center;">Order</th>
-                        <th style="text-align: center;">Name Booking</th>
-                        <th style="text-align: center;">Date</th>
-                        <th style="text-align: center;">Status</th>
-                        <th style="text-align: center;"></th>
+                        <th>Order</th>
+                        <th>Name Booking</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th></th>
                     </tr>
                     @foreach( $actbookings as $index => $book)
                     <tr>

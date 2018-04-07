@@ -61,44 +61,19 @@
                                 </div>
                                 <div class="full-width">
                                     <input type="checkbox" id="chkCon" onClick="check(this)" />
-                                    ยอมรับข้อตกลง
+                                    I have read and agree to these terms and conditions.
+                                    <a href="/conditions">here</a>
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 </div>
                                 <div class="full-width">
-								    <input type="submit" id="btnSend" value="ตกลง" disabled/>
+								    <input type="submit" id="btnSend" value="Booking" disabled/>
                                 </div>
 							</form>
                         </div>
                         </article>
                         <!--//deal-->
 
-                        <article class="one-third">
-                            <!--latest offers-->
-                            <div class="static-content index">
-                                <div class="row">
-                                    <!--deal-->
-                                    <div class="details">
-                                        <h3 class="phometitle">{{$booking->activity_name}}
-                                            <span class="stars">
-                                                <i class="material-icons"></i>
-                                                <i class="material-icons"></i>
-                                                <i class="material-icons"></i>
-                                                <i class="material-icons"></i>
-                                            </span>                                    
-                                        </h3>
-                                    </div>
-                                    <hr>
-                                    @foreach( $booking->images as  $index => $img)
-                                    @if($index === 1)
-                                        <figure><a href="#" title=""><img src="/img/{{$img->image_name}}" alt="{{$booking->activity_name}}" /></a></figure>
-                                        <input type="hidden" value="{{$index=0}}">
-                                    @endif
-                                    @endforeach 
-                                    <!--//deal-->
-                                </div>
-                            </div>
-                            <!--//latest offers-->
-                        </article>
+                        @include('booking.footercreatebook')
 
                     </div>
                     <!--//latest offers-->

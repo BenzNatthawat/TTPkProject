@@ -16,7 +16,7 @@ class ActivityController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('index','show','searchform');    
     }
     
     /**
@@ -46,10 +46,13 @@ class ActivityController extends Controller
      */
     public function create()
     {
-        if (Auth::user()->roles->role_name == "admin")
+        if (Auth::user()->roles->role_name == "admin"){
             return view('activity.create');
-        else 
-            echo "ไม่มีเสิทธิ์เข้าหน้านี้";
+        }
+        else {
+            $message = array('head' => 'You do not have role','detail' => 'You do not have role in create activity');
+            return view('error.dohaverole')->with('message', $message);
+        }
     }
 
     /**
@@ -75,12 +78,12 @@ class ActivityController extends Controller
                 $nameimg = $imageName.'.'.$imageSur;
 
                 // $cur_dir = explode('\\', getcwd());
+                // $file->move($ddd, $nameimg);
+                
                 // $ddd =  $cur_dir[count($cur_dir)-1];
                 // $ddd = $ddd.'/img/';
                 // echo $ddd.$nameimg;
-                // $file->move($ddd, $nameimg);
-                
-                $file->move(base_path() . '/public/img/', $nameimg);
+                   $file->move(base_path() . '/public/img/', $nameimg);
                 $img = new Image;
                 $img->image_name = $nameimg;
                 $img->activities_id = $id->id;
@@ -109,6 +112,7 @@ class ActivityController extends Controller
         $sum = $activities->reviews->count();
         if($sum == 0)
             $sum = 1;
+        
         return view('activity.show')    ->with('activities',$activities)
                                         ->with('id',$id)
                                         ->with('Excellent',$Excellent)
@@ -129,7 +133,7 @@ class ActivityController extends Controller
     public function edit($id)
     {
         $activities = Activity::findOrFail($id);
-        return view('activity.edit')    ->with('activities',$activities);
+        return view('activity.edit')->with('activities',$activities);
     }
 
     /**
@@ -143,6 +147,37 @@ class ActivityController extends Controller
     {
         $activities = Activity::findOrFail($id);      
         
+        if($activities->map_location){
+            $activities->map_location->update($request->all());
+        }
+        else{
+            Map::create( $request->all() );
+            $map = Map::all()->last();
+            $map->activities_id = $id;
+            $map->save();
+        }
+
+        if(Input::hasFile('files')){
+            foreach(Input::file('files') as $file){
+                $imageName = rand();
+                $imageSur = $file->getClientOriginalExtension();
+                $nameimg = $imageName.'.'.$imageSur;
+
+                // $cur_dir = explode('\\', getcwd());
+                // $file->move($ddd, $nameimg);
+                
+                // $ddd =  $cur_dir[count($cur_dir)-1];
+                // $ddd = $ddd.'/img/';
+                // echo $ddd.$nameimg;
+                   $file->move(base_path() . '/public/img/', $nameimg);
+                $img = new Image;
+                $img->image_name = $nameimg;
+                $img->activities_id = $id->id;
+                $img->save();
+                // echo base_path();
+            }
+        }
+
         $activities->update($request->all());
         return redirect('/activity');
     }

@@ -20,9 +20,10 @@ class ReservationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('index');
     }
 
     public function index()
@@ -130,11 +131,17 @@ class ReservationController extends Controller
     public function show($id)
     {
         $Book = Booking::findOrFail($id);
+        $statusbooking = 3;
+
         if($Book->users[0]->id === Auth::user()->id){
-            return view('booking.editdelect.editreservation')->with('Book', $Book);
+            return view('booking.showbooking')  ->with('Book', $Book)
+                                                ->with('statusbooking', $statusbooking);
             // dd($Book);
         }
-        echo("benz");
+        else{
+            $message = array('head' => 'You do not have role','detail' => $Book);
+            return view('error.dohaverole')->with('message', $message);
+        }
     }
 
     /**

@@ -91,12 +91,19 @@ class BookingAtivityController extends Controller
     public function show($id)
     {
         $Book = Booking::findOrFail($id);
+        $statusbooking = 1;
+
         if($Book->users[0]->id === Auth::user()->id){
-            return view('booking.editdelect.editactivity')->with('Book', $Book);
+            $total = $Book->number_child*$Book->activity->price_child+$Book->number_adult*$Book->activity->price_adult;
+            return view('booking.showbooking')  ->with('Book', $Book)
+                                                ->with('total',$total)
+                                                ->with('statusbooking',$statusbooking);
             // dd($Book);
         }
-        echo("benz");
-        // dd($Book[0]);
+        else{
+            $message = array('head' => 'You do not have role','detail' => $Book);
+            return view('error.dohaverole')->with('message', $message);
+        }
     }
 
     /**

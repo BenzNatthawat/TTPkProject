@@ -234,7 +234,7 @@
 								<li>
 									<figure class="left">
 										<img src="../images/avatar.jpg" alt="avatar">
-										<address><span>{{$review->user->user_name}}</span><br><br>{{$review->created_at}}</address>
+										<address><span>{{$review->user->first_name or $review->user->user_name}}</span><br><br>{{$review->created_at}}</address>
 									</figure>
 									<div>{{$review->review}}</div>
 								</li>
@@ -246,7 +246,7 @@
 
 						@auth
 						<article>
-							<form action="/postreview/{{$id}}" method="post" enctype="multipart/form-data">
+							<form action="/activity/postreview/{{$id}}" method="post" enctype="multipart/form-data">
 								<div>
 									<textarea name="review" placeholder="Add Reviews"></textarea>
 								</div><br>

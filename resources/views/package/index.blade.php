@@ -43,7 +43,7 @@
                                     <div class="description">
                                         <p class="phome">{{$item->desciption}}</p><a href="/packet/{{$item->id}}">More info</a>
                                     </div>
-                                    <span class="price">start from <em>{{$item->price_package}} THB</em></span>
+                                    <span class="price">start from <em>{{$item->price_packet}} THB</em></span>
 
                                     <form action="/packet/{{$item->id}}" method="post" enctype="multipart/form-data">
                                     <a href="/BookingPackage/{{$item->id}}/create/1" title="Book now" class="gradient-button">Book now</a>

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Booking extends Model
 {
     // protected $table = 'bookings';
-    protected $fillable = ['prefix','first_name','last_name','email','telephone','number_adult','number_child','number_baby','booking_date','town_city','country','booking_status','shuttles_id','packageservices_id','activities_id'];
+    protected $fillable = ['prefix','first_name','last_name','email','telephone','number_adult','number_child','number_baby','booking_date','town_city','country','booking_status','shuttles_id','packageservices_id','activities_id','payment'];
 
     public function users(){
         return $this->belongsToMany('App\User');
