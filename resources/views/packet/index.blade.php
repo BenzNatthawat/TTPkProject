@@ -14,6 +14,19 @@
                     <div class="static-content index">
                         <div class="row">
                             <h1>Packet</h1>
+
+                            <div class="search-body">
+                                <!--search-->
+                                <div class="search">
+                                    <form id="search-form" method="post" action="searchformP">
+                                        <input type="search" placeholder="Search entire site here" name="site_search" id="site_search" />
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}"> 
+                                        <input type="submit" id="submit-site-search" value="submit-site-search" name="submit-site-search"/>
+                                    </form>
+                                </div>
+                                <!--//search-->
+                            </div>
+
                             @foreach( $packages as $item )
                             <!--deal-->
                             <article class="one-third" id="be">

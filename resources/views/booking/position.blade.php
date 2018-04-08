@@ -30,7 +30,7 @@
                                 Zoom    
                                 <input name="zoom_value" type="text" id="zoom_value" value="0" size="5" />    
                                 <br />  
-                                <input type="submit" name="button" id="button" value="บันทึก" />    
+                                <input type="submit" name="button" id="button" value="save" />    
                                 </form>    
                             </div>
                             
@@ -41,7 +41,7 @@
                                 Longitude    
                                 <input name="lon_value" type="text" id="drilon_value" value="0" />  <br />
 
-                                <input type="submit" name="button" id="button" value="บันทึก" />    
+                                <input type="submit" name="button" id="button" value="save" />    
                                 </form> 
                             </div>
 

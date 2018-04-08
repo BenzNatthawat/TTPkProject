@@ -53,6 +53,7 @@ paypal.Button.render({
         // Make a call to the REST api to execute the payment
         return actions.payment.execute().then(function() {
             window.alert('Payment Complete!');
+            window.location.href = '/confirmpayment/{{$Book->id}}';
         });
     }
 

@@ -16,7 +16,7 @@
     
     <link rel="stylesheet" href="/css/styles.css" />
     <link rel="stylesheet" href="/css/theme-turqoise.css" id="template-color" />
-    <link rel="stylesheet" type="text/css" href="../css/alert.css">
+    <link rel="stylesheet" type="text/css" href="/css/alert.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightslider/1.1.6/css/lightslider.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800|Roboto+Slab:400,700&subset=latin,latin-ext,greek-ext,greek,cyrillic,vietnamese,cyrillic-ext">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">

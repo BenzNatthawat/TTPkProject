@@ -45,7 +45,7 @@
                                 </div>
 									<input type="hidden" name="_method" value="PUT">
                                     {{csrf_field()}}
-                                <div class="full-width">
+                                <div style="margin-top: 10px;" class="full-width">
 								    <input type="submit" value="Update Account">
                                 </div>
 							</form>
@@ -74,7 +74,7 @@
                                 </div>
 									<input type="hidden" name="_method" value="PUT">
                                     {{csrf_field()}}
-                                <div class="full-width">
+                                <div style="margin-top: 10px;" class="full-width">
 								    <input type="submit" value="Change Password">
                                 </div>
 							</form>

@@ -35,8 +35,8 @@
                                 
                                 <div class="row">
                                     <div class="f-item one-prefix">
-                                        <label for="Prefix">Prefix</label>
-                                        <select name="prefix">
+                                        <label for="prefix">Prefix</label>
+                                        <select id="prefix" name="prefix">
                                             <option selected>Mr.</option>
                                             <option>Ms.</option>
                                             <option>Mrs.</option>
@@ -45,45 +45,45 @@
                                         </select>
                                     </div>
                                     <div class="f-item one-frname">
-                                        <label for="First name">First name</label>
-                                        <input type="text" name="first_name" placeholder="First name ..." value="{{old('first_name', Auth::user()->first_name)}}" required>
+                                        <label for="first_name">First name</label>
+                                        <input id="first_name" type="text" name="first_name" placeholder="First name ..." value="{{old('first_name', Auth::user()->first_name)}}" required>
                                     </div>
                                     <div class="f-item one-laname ">
-                                        <label for="Last name">Last name</label>
-                                        <input type="text" name="last_name" placeholder="Last name ..." value="{{old('last_name', Auth::user()->last_name)}}" required>
+                                        <label for="last_name">Last name</label>
+                                        <input id="last_name" type="text" name="last_name" placeholder="Last name ..." value="{{old('last_name', Auth::user()->last_name)}}" required>
                                     </div>
                                     <div class="f-item one-half">
-                                        <label for="Email address">Email address</label><span class="info">Example: john@gmail.com</span>
-                                        <input type="email" name="email" placeholder="john@gmail.com" value="{{old('email', Auth::user()->email)}}" required>
+                                        <label for="email">Email address</label><span class="info">Example: john@gmail.com</span>
+                                        <input id="email" type="email" name="email" placeholder="john@gmail.com" value="{{old('email', Auth::user()->email)}}" required>
                                     </div>
                                     <div class="f-item one-half">
-                                        <label for="Phone number">Phone number</label><span class="info">Area Code - Phone Number</span>
-                                        <input type="text" name="telephone" placeholder="Phone number ..." value="{{old('telephone', Auth::user()->telephone)}}" required>
+                                        <label for="telephone">Phone number</label><span class="info">Area Code - Phone Number</span>
+                                        <input id="telephone" type="text" name="telephone" placeholder="Phone number ..." value="{{old('telephone', Auth::user()->telephone)}}" required>
                                     </div>
                                     <div class="f-item one-half">
-                                        <label for="Town_City">Town / City</label>
-                                        <input type="text" name="town_city" placeholder="Town / City ..."  value="{{old('town_city', Auth::user()->town_city)}}" required>
+                                        <label for="town_city">Town / City</label>
+                                        <input id="town_city" type="text" name="town_city" placeholder="Town / City ..."  value="{{old('town_city', Auth::user()->town_city)}}" required>
                                     </div>
                                     <div class="f-item one-half">
-                                        <label for="Country">Country</label>
-                                        <input type="text" name="country" placeholder="Country ..."  value="{{old('country', Auth::user()->country)}}" required>
+                                        <label for="country">Country</label>
+                                        <input id="country" type="text" name="country" placeholder="Country ..."  value="{{old('country', Auth::user()->country)}}" required>
                                     </div> 
                                     <div class="f-item one-half">
-                                        <label for="Adult">Adult (s)</label><span class="info">Over 11 Years old</span>
-                                        <input type="number" name="number_adult" value="{{old('number_adult') == NULL ? '1' : old('number_adult')}}" min="1" max="20" required/>
+                                        <label for="number_adult">Adult (s)</label><span class="info">Over 11 Years old</span>
+                                        <input id="number_adult" type="number" name="number_adult" value="{{old('number_adult') == NULL ? '1' : old('number_adult')}}" min="1" max="20" required/>
                                     </div> 
                                     <div class="f-item one-half">
-                                        <label for="Childs">Child (s)</label><span class="info">4 - 11 Years old</span>
-                                        <input type="number" name="number_child" value="{{old('number_child') == NULL ? '0' : old('number_child')}}" min="0" max="20" required/>
+                                        <label for="number_child">Child (s)</label><span class="info">4 - 11 Years old</span>
+                                        <input id="number_child" type="number" name="number_child" value="{{old('number_child') == NULL ? '0' : old('number_child')}}" min="0" max="20" required/>
                                     </div>
                                     <div class="f-item one-half">
-                                        <label for="Infant / Baby">Infant(s) / Baby(s)</label><span class="info">Age below 4 Years old</span>
-                                        <input type="number" name="number_baby" value="{{old('number_baby') == NULL ? '0' : old('number_baby')}}" min="0" max="20" required/>
+                                        <label for="number_baby">Infant(s) / Baby(s)</label><span class="info">Age below 4 Years old</span>
+                                        <input id="number_baby" type="number" name="number_baby" value="{{old('number_baby') == NULL ? '0' : old('number_baby')}}" min="0" max="20" required/>
                                     </div> 
                                     <div class="f-item one-half">
                                         <label for="Travel Date">Travel Date</label>
                                         <div class="datepicker-wrap">
-                                            <input type="text" placeholder="" id="datepicker5" name="booking_date" value="{{old('booking_date')}}" required/>
+                                            <input type="text" placeholder="mm/dd/yy" id="datepicker5" name="booking_date" value="{{old('booking_date')}}" required/>
                                         </div>
                                     </div>
                                 </div>

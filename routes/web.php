@@ -19,11 +19,14 @@ Route::get('/home', function () {
 });
 
 Route::resource('/activity','ActivityController');
-Route::post('/searchform','ActivityController@searchform');
+Route::post('/searchformA','ActivityController@searchform');
 
 Route::resource('/packet','PackageController');
+Route::post('/searchformP','PackageController@searchform');
 
 Route::get('/booking','BookingAtivityController@index');
+Route::get('/confirmpayment/{id}','BookingAtivityController@confirmpayment');
+Route::post('/statusbooking/{id}','BookingAtivityController@statusbooking');
 
 Route::resource('/BookingActivity','BookingAtivityController');
 Route::get('/BookingActivity/{id_activity}/create/{id_book}','BookingAtivityController@create');

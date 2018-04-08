@@ -74,7 +74,7 @@
                                         <td>Travel Date:</td>
                                         <td>{{$Book->booking_date}}</td>
                                     </tr>
-                                    @if($Book->payment != 'no')
+                                    @if($Book->payment == 'pay')
                                     <tr>
                                         <td>payment</td>
                                         <td>
@@ -161,7 +161,7 @@
                                         <td>Travel Date:</td>
                                         <td>{{$Book->booking_date}}</td>
                                     </tr>
-                                    @if($Book->payment != 'no')
+                                    @if($Book->payment == 'pay')
                                     <tr>
                                         <td>payment</td>
                                         <td>

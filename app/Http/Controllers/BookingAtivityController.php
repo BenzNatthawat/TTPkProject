@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Booking;
 use Auth;
 use App\Http\Requests\StorePostRequest;
+use Carbon\Carbon;
 
 class BookingAtivityController extends Controller
 {
@@ -43,6 +44,8 @@ class BookingAtivityController extends Controller
         $booking = Activity::findOrFail($id_activity);
 
         if($id_book == 2){
+            $carbon = new Carbon();  
+            $today = $carbon->format('m/d/Y');
             $rules = [
                 "first_name" => "required|max:20|min:3",
                 "last_name" => "required|max:20|min:3",
@@ -53,11 +56,10 @@ class BookingAtivityController extends Controller
                 "number_adult" => "required|numeric",
                 "number_child" => "required|numeric",
                 "number_baby" => "required|numeric",
-                "booking_date" => "required",
+                "booking_date" => "required|after:$today",
             ];
             $this->validate($request, $rules);
         }
-            
         if($id_book == 1){
             return view('booking.create1')  ->with('booking', $booking);
         }
@@ -126,10 +128,7 @@ class BookingAtivityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $Bookings = Booking::findOrFail($id);      
-        $Bookings->booking_status = $request->booking_status;
-        $Bookings->update();
-        return redirect('/booking');
+        //
     }
 
     /**
@@ -151,5 +150,21 @@ class BookingAtivityController extends Controller
         $user = Auth::user();
         // dd($user);
         return view('booking.position')->with('user', $user);
+    }
+
+    public function confirmpayment($id)
+    {
+        $Booking = Booking::findOrFail($id);      
+        $Booking->payment = 'pay';
+        $Booking->save();
+        return back();
+    }
+
+    public function statusbooking($id)
+    {
+        $Bookings = Booking::findOrFail($id);    
+        $Bookings->booking_status = 'Confirm';
+        $Bookings->update();
+        return redirect('/booking');
     }
 }

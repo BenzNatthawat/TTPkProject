@@ -30,7 +30,7 @@ class PackageController extends Controller
         $packages = Packagesservice::orderBy('id')->paginate($pagenum);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
-        return view('package.index')    ->with('packages',$packages)
+        return view('packet.index')    ->with('packages',$packages)
                                         ->with('user',$user);
     }
 
@@ -48,7 +48,7 @@ class PackageController extends Controller
             $page = ($page != null)?$page:1;
 
             //$activities = Activity::orderBy('id','desc')->get();
-            return view('package.create')   ->with('page',$page)
+            return view('packet.create')   ->with('page',$page)
                                             ->with('pagenum',$pagenum)
                                             ->with('activities',$activities);
         }
@@ -93,7 +93,7 @@ class PackageController extends Controller
         if($sum == 0)
             $sum = 1;
 
-        return view('package.show') ->with('packages',$packages)
+        return view('packet.show') ->with('packages',$packages)
                                     ->with('id',$id)
                                     ->with('Excellent',$Excellent)
                                     ->with('Verygood',$Verygood)
@@ -112,7 +112,7 @@ class PackageController extends Controller
     public function edit($id)
     {
         $packages = Packagesservice::findOrFail($id);
-        return view('package.edit')    ->with('packages',$packages);
+        return view('packet.edit')    ->with('packages',$packages);
     }
 
     /**
@@ -168,5 +168,18 @@ class PackageController extends Controller
         $request['packagesservices_id'] = $id_packet;
         Review::create( $request->all() );
         return redirect()->action('PackageController@show', ['id' => $id_packet]);
+    }
+    
+    public function searchform(Request $request)
+    {
+        $pagenum = 8;
+        $search = $request->get('site_search');
+        $packages = Packagesservice::where('package_name','like','%'.$search.'%')->paginate($pagenum);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+
+        $user = Auth::user();
+        return view('packet.index')   ->with('packages',$packages)
+                                        ->with('user',$user);
     }
 }

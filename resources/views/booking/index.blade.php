@@ -25,7 +25,16 @@
                     @if($book->activities_id != NULL)
                     <tr>
                         <td>{{$index+1}}</td>
-                        <td>{{$book->activity->activity_name}}</td>
+                        <td>
+                            {{$book->activity->activity_name}}
+                            @if($book->payment == 'pay')
+                            <div class="w3-tag w3-round w3-green" style="padding:3px">
+                                <div class="w3-tag w3-round w3-green w3-border w3-border-white">
+                                    {{$book->payment}} 
+                                </div>
+                            </div>
+                            @endif
+                        </td>
                         <td>{{$book->created_at}}</td>
                         <td>
                             <a href="BookingActivity/{{$book->id}}">
@@ -63,7 +72,16 @@
                     @elseif($book->package != NULL)
                     <tr>
                         <td>{{$index+1}}</td>
-                        <td>{{$book->package->package_name}}</td>
+                        <td>
+                            {{$book->package->package_name}}
+                            @if($book->payment == 'pay')
+                            <div class="w3-tag w3-round w3-green" style="padding:3px">
+                                <div class="w3-tag w3-round w3-green w3-border w3-border-white">
+                                    {{$book->payment}} 
+                                </div>
+                            </div>
+                            @endif
+                        </td>
                         <td>{{$book->created_at}}</td>
                         <td>
                             <a href="BookingPackage/{{$book->id}}">
@@ -112,9 +130,7 @@
                         <td>{{$book->first_name}} {{$book->last_name}}</td>
                         <td>{{$book->created_at}}</td>
                         <td>{{$book->booking_status}}</td>
-                        <form action="/BookingActivity/{{$book->id}}" method="post" enctype="multipart/form-data">
-                            <input type="hidden" name="booking_status" value="Confirm">
-                            <input type="hidden" name="_method" value="PUT">
+                        <form action="/statusbooking/{{$book->id}}" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <td>
                                 <input type="submit" name="" value="Confirm">
@@ -144,9 +160,7 @@
                         <td>{{$book->first_name}} {{$book->last_name}}</td>
                         <td>{{$book->created_at}}</td>
                         <td>{{$book->booking_status}}</td>
-                        <form action="/BookingActivity/{{$book->id}}" method="post" enctype="multipart/form-data">
-                            <input type="hidden" name="booking_status" value="Confirm">
-                            <input type="hidden" name="_method" value="PUT">
+                        <form action="/statusbooking/{{$book->id}}" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <td>
                                 <input type="submit" name="" value="Confirm">
@@ -176,9 +190,7 @@
                         <td>{{$book->first_name}} {{$book->last_name}}</td>
                         <td>{{$book->created_at}}</td>
                         <td>{{$book->booking_status}}</td>
-                        <form action="/BookingActivity/{{$book->id}}" method="post" enctype="multipart/form-data">
-                            <input type="hidden" name="booking_status" value="Confirm">
-                            <input type="hidden" name="_method" value="PUT">
+                        <form action="/statusbooking/{{$book->id}}" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <td>
                                 <input type="submit" name="" value="Confirm">
