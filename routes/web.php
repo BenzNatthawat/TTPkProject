@@ -18,6 +18,8 @@ Route::get('/home', function () {
     return view('home');
 });
 
+Route::get('/createAandP', 'HomeController@createAandP');
+
 Route::resource('/activity','ActivityController');
 Route::post('/searchformA','ActivityController@searchform');
 
@@ -70,4 +72,4 @@ Route::get('/postData', function () {
 
 Route::get('/pay','Payment@pay');
 
-//Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');

@@ -15,7 +15,7 @@
                     	<article class="full-width">
                             <div class="static-content create"> 
                             <form action="/activity" method="post" enctype="multipart/form-data">
-                                <h1>Create Activity</h1>
+                                <h2>Create <span>Activity</span></h2>
 
                                 <div class="full-width">
     								<label for="activity name">activity name</label>

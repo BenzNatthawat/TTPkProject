@@ -76,15 +76,6 @@
                             <!--//deal-->
                             @endif
                             @endforeach
-                            @if($user != NULL)
-                                @if($user->roles->role_name == "admin")
-                                    <article class="one-fourth" id="be">
-                                        <div class="details" style="height: 100%">  
-                                            <a href="/activity/create" class="gradient-button">create</a>
-                                        </div>
-                                    </article>
-                                @endif
-                            @endif
 
                         </div>
                         <div class="full-width-page">

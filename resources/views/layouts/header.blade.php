@@ -91,6 +91,11 @@
                                         </span>
                                     </a>
                                 </li>
+
+                                @if(Auth::user()->roles->role_name == 'admin')
+                                    <li><a href="/createAandP">create A&P</a></li>
+                                @endif
+
                                 <li><a href="/positions">position</a></li>
                                 <!-- <li><a href="#">Setting</a></li> -->
                                 <li><a href="{{ route('logout') }}" 

@@ -16,7 +16,7 @@
                     	<article class="full-width">
                             <div class="static-content create"> 
                             <form action="/packet" method="post" enctype="multipart/form-data">
-                                <h1>Create package</h1>
+                                <h2>Create <span>package</span></h2>
 
                                 <div class="full-width">
     								<label for="package name">package name</label>

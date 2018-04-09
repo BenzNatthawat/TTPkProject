@@ -162,9 +162,15 @@ class BookingAtivityController extends Controller
 
     public function statusbooking($id)
     {
-        $Bookings = Booking::findOrFail($id);    
-        $Bookings->booking_status = 'Confirm';
-        $Bookings->update();
-        return redirect('/booking');
+        if (Auth::user()->roles->role_name == "admin"){
+            $Bookings = Booking::findOrFail($id);    
+            $Bookings->booking_status = 'Confirm';
+            $Bookings->update();
+            return redirect('/booking');
+        }
+        else {
+            $message = array('head' => 'You do not have role','detail' => 'You do not have role in change status booking');
+            return view('error.dohaverole')->with('message', $message);
+        }
     }
 }
