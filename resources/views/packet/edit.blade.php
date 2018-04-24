@@ -33,15 +33,15 @@
 
                                 <div class="one-third">
     								<label for="start_time">start time</label>
-    								<input type="number" name="start_time" placeholder="start time" value="{{$packages->start_time}}">
+    								<input type="text" name="start_time" placeholder="start time" value="{{$packages->start_time}}">
                                 </div>
                                 <div class="one-third">
     								<label for="finish_time">finish time</label>
-    								<input type="number" name="finish_time" placeholder="finish time" value="{{$packages->finish_time}}">
+    								<input type="text" name="finish_time" placeholder="finish time" value="{{$packages->finish_time}}">
                                 </div>
                                 <div class="one-third">
     								<label for="take_time">take time</label>
-    								<input type="number" name="take_time" placeholder="take time" value="{{$packages->take_time}}">
+    								<input type="text" name="take_time" placeholder="take time" value="{{$packages->take_time}}">
                                 </div>
 
 								<div class="full-width">

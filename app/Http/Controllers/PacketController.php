@@ -9,8 +9,9 @@ use App\Models\Packagesservice;
 use Input as Input;
 use App\Models\Review;
 use Auth;
+use App\Models\Image;
 
-class PackageController extends Controller
+class PacketController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -66,12 +67,33 @@ class PackageController extends Controller
      */
     public function store(Request $request)
     {
+        $request['destroy'] = "1";
         Packagesservice::create( $request->all());
         $packageid = Packagesservice::all()->last();
 
-        foreach ($request->packages as $package) {
-            $packageid->activities()->sync($package);
+        if(Input::hasFile('files')){
+            foreach(Input::file('files') as $file){
+                $imageName = rand();
+                $imageSur = $file->getClientOriginalExtension();
+                $nameimg = $imageName.'.'.$imageSur;
+
+                // $cur_dir = explode('\\', getcwd());
+                // $file->move($ddd, $nameimg);
+                
+                // $ddd =  $cur_dir[count($cur_dir)-1];
+                // $ddd = $ddd.'/img/';
+                // echo $ddd.$nameimg;
+                $file->move(base_path() . '/public/img/', $nameimg);
+                $img = new Image;
+                $img->image_name = $nameimg;
+                $img->packagesservices_id = $packageid->id;
+                $img->save();
+                // echo base_path();
+            }
         }
+        
+        $packageid->activities()->sync($request->packages);
+
         return redirect('/packet');
     }
 
@@ -159,7 +181,10 @@ class PackageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $Packets = Packagesservice::findOrFail($id);
+        $Packets->destroy = 0;
+        $Packets->save();
+        return redirect('/packet');
     }
 
     public function postreview(Request $request, $id_packet)
@@ -167,7 +192,7 @@ class PackageController extends Controller
         $request['users_id'] = Auth::user()->id;
         $request['packagesservices_id'] = $id_packet;
         Review::create( $request->all() );
-        return redirect()->action('PackageController@show', ['id' => $id_packet]);
+        return redirect()->action('PacketController@show', ['id' => $id_packet]);
     }
     
     public function searchform(Request $request)

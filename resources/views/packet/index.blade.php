@@ -28,11 +28,23 @@
                             </div>
 
                             @foreach( $packages as $item )
+                            @if($item->destroy != 0)
                             <!--deal-->
                             <article class="one-third" id="be">
 
-                                <figure><a href="packet/{{$item->id}}" title="">
-                                <img style="width: 900px; height: 250px;" src="/images/tour.jpg" alt="tour" /></a></figure>
+                                @if($item->images->isNotEmpty())
+                                    <figure>
+                                    <a href="packet/{{$item->id}}" title="">
+                                        <img style="width: 900px; height: 250px;" src="img/{{$item->images[0]->image_name}}" alt="{{$item->activity_name}}" />
+                                    </a>
+                                    </figure>
+                                @else
+                                    <figure>
+                                    <a href="packet/{{$item->id}}" title="">
+                                        <img style="width: 900px; height: 250px;" src="/images/showactivity.jpg" alt="{{$item->activity_name}}" />
+                                    </a>
+                                    </figure>
+                                @endif
 
                                 <div class="details" style="height: 245px;">
                                     <h3 class="phometitle">{{$item->package_name}}
@@ -73,6 +85,7 @@
                                 </div>
                             </article>
                             <!--//deal-->
+                            @endif
                             @endforeach
 
                         </div>

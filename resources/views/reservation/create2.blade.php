@@ -99,11 +99,12 @@
                                 </div>
                                 <div class="full-width">
                                     <input type="checkbox" id="chkCon" onClick="check(this)" />
-                                    ยอมรับข้อตกลง
+                                    I have read and agree to these terms and conditions.
+                                    <a href="/conditions">here</a>
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 </div>
                                 <div class="full-width">
-                                    <input type="submit" id="btnSend" value="ตกลง" disabled/>
+                                    <input type="submit" id="btnSend" value="Booking" disabled/>
                                 </div>
                             </form>
                         </div>

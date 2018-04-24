@@ -7,6 +7,7 @@ use App\Models\Packagesservice;
 use App\Models\Booking;
 use Auth;
 use App\Http\Requests\StorePostRequest;
+use Carbon\Carbon;
 
 class BookingPackageController extends Controller
 {
@@ -35,6 +36,8 @@ class BookingPackageController extends Controller
         $booking = Packagesservice::findOrFail($id_package);
 
         if($id_book == 2){
+            $carbon = new Carbon();  
+            $today = $carbon->format('m/d/Y');
             $rules = [
                 "first_name" => "required|max:20|min:3",
                 "last_name" => "required|max:20|min:3",
@@ -45,7 +48,7 @@ class BookingPackageController extends Controller
                 "number_adult" => "required|numeric",
                 "number_child" => "required|numeric",
                 "number_baby" => "required|numeric",
-                "booking_date" => "required",
+                "booking_date" => "required|after:$today",
             ];
             $this->validate($request, $rules);
         }

@@ -64,6 +64,7 @@ class ActivityController extends Controller
     
     public function store(Request $request)
     {
+        $request['destroy'] = "1";
         Activity::create( $request->all() );
         $id = Activity::all()->last();
         Map::create( $request->all() );
@@ -83,7 +84,7 @@ class ActivityController extends Controller
                 // $ddd =  $cur_dir[count($cur_dir)-1];
                 // $ddd = $ddd.'/img/';
                 // echo $ddd.$nameimg;
-                   $file->move(base_path() . '/public/img/', $nameimg);
+                $file->move(base_path() . '/public/img/', $nameimg);
                 $img = new Image;
                 $img->image_name = $nameimg;
                 $img->activities_id = $id->id;

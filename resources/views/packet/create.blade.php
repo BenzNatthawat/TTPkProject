@@ -30,13 +30,14 @@
     								<label for="desciption">desciption</label>
     								<textarea name="desciption"></textarea>
                                 </div>
+
                                 <div class="one-half">
-    								<label for="start time">start time</label>
-    								<input type="number" name="start_time" placeholder="start time">
+                                    <label for="start_time">start time</label>
+                                    <input id="timepicker1" type="text" name="start_time" placeholder="start_time">
                                 </div>
                                 <div class="one-half">
-    								<label for="finish time">finish time</label>
-    								<input type="number" name="finish_time" placeholder="finish time">
+                                    <label for="finish_time">finish time</label>
+                                    <input id="timepicker3" type="text" name="finish_time" placeholder="finish_time">
                                 </div>
 
 								<div class="full-width">
@@ -73,5 +74,17 @@
         </div>
     </main>
     <!--//main-->
+
+@endsection
+
+@section('js')
+
+<script src="../js/timepicki.js"></script>
+<script type="text/javascript"> 
+    $('#timepicker1').timepicki();
+    $('#timepicker2').timepicki();
+    $('#timepicker3').timepicki();
+    $('#timepicker4').timepicki();
+</script>
 
 @endsection

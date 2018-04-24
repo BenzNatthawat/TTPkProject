@@ -86,7 +86,7 @@
                                 </div>
 									<input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="full-width">
-								    <input type="submit" value="Submit">
+								    <input type="submit" value="Continue">
                                 </div>
 							</form>
                         </div>

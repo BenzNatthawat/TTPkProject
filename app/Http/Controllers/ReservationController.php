@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use DateTime;
 
-
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use App\Models\Shuttle;
 use Illuminate\Http\Request;
@@ -40,18 +40,25 @@ class ReservationController extends Controller
     {
         $book = $request->all();
         $user = Auth::user();
-
-        if($id_book == 2){
+        if($id_book == 1){
+            $carbon = new Carbon();  
+            $today = $carbon->format('m/d/Y');
             $rules = [
                 // "radio" => "required|max:20|min:3",
                 // "pick_up" => "required|max:20|min:3",
                 // "drop_off" => "required|max:20|min:3",
-                // "depart_date" => "required|max:20|min:3",
+                "depart_date" => "required|after:$today",
                 // "depart_time" => "required|max:20|min:3",
-                // "return_date" => "required|max:20|min:3",
+                "return_date" => "required|after:$today",
                 // "return_time" => "required|max:20|min:3",
                 // "vehicle_type" => "required|max:20|min:3",
                 // "round" => "required|max:20|min:3",
+            ];
+            $this->validate($request, $rules);
+        }
+        if($id_book == 2){
+            
+            $rules = [
                 "first_name" => "required|max:20|min:3",
                 "last_name" => "required|max:20|min:3",
                 "email" => "required|min:5|email",
@@ -82,16 +89,20 @@ class ReservationController extends Controller
     {
         $numdri = User::all()->where('roles_id','like',3)->count();
         $queue = Shuttle::orderBy('id','desc')->get();
-        // dd($queue[0]->userqu->queue);
-        
+
         if($request->radio === 'form1'){
-            $queuedri = $queue[0]->userqu->queue+1;
+            if($queue->isEmpty())
+                $queuedri = 1;
+            else
+                $queuedri = $queue[0]->userqu->queue+1;
+
             if($numdri >= $queuedri){
                 $queuedri = $queuedri;
             }
             else{
                 $queuedri = 1;
             }
+
             $queunumdri = User::orderBy('id','desc')->where('queue','like',$queuedri)->get();
             $request['users_id'] = $queunumdri[0]->id;
             // dd($queunumdri[0]->shuffles);
@@ -178,6 +189,7 @@ class ReservationController extends Controller
         $book = Booking::findOrFail($id);
         $book->users()->sync([]);
         $book->delete();
+        $book->shuttle()->delete();
         return redirect('/booking');
     }
 }

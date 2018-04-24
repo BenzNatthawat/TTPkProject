@@ -100,31 +100,7 @@
     $('#timepicker2').timepicki();
     $('#timepicker3').timepicki();
     $('#timepicker4').timepicki();
-        (function( $ ) {
-            $(document).ready(function(){
-                $('.form').hide();
-                $('#form1').show();
-                $('.f-item:nth-child(1)').addClass('active');
-                $('.f-item:nth-child(1) span').addClass('checked');     
-
-                $('#hero-gallery').lightSlider({
-                    gallery:true,
-                    item:1,
-                    pager:false,
-                    gallery:false,
-                    slideMargin: 0,
-                    speed:2000,
-                    pause:6000,
-                    mode: 'fade',
-                    auto:true,
-                    loop:true,
-                    onSliderLoad: function() {
-                        $('#hero-gallery').removeClass('cS-hidden');
-                    }  
-                });         
-            });
-        })(jQuery);
-    </script>
+</script>
 
     <script type="text/javascript">
          $(document).ready(function() {

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Packagesservice extends Model
 {
-    protected $fillable = ['package_name', 'price_packet', 'desciption', 'start_time', 'finish_time	', 'take_time',];
+    protected $fillable = ['package_name', 'price_packet', 'desciption', 'start_time', 'finish_time	', 'take_time','destroy',];
 
     public function activities(){
         return $this->belongsToMany('App\Models\Activity');
@@ -14,5 +14,9 @@ class Packagesservice extends Model
 
     public function reviews(){
         return $this->hasMany('App\Models\Review', 'packagesservices_id');
+    }
+
+    public function images(){
+    	return $this->hasMany('App\Models\Image', 'packagesservices_id');
     }
 }

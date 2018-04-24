@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Activity extends Model
 {
-	protected $fillable = ['activity_name', 'price_adult', 'price_child', 'desciption', 'start_time', 'finish_time', 'take_time',];
+	protected $fillable = ['activity_name', 'price_adult', 'price_child', 'desciption', 'start_time', 'finish_time', 'take_time','destroy',];
     
     public function images(){
     	return $this->hasMany('App\Models\Image', 'activities_id');

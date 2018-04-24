@@ -31,11 +31,19 @@
                             @if($item->destroy != 0)
                             <!--deal-->
                             <article class="one-fourth" id="be">
-                                @foreach( $item->images as $index => $img)
-                                @if($img->activities_id == $item->id && $index == 0)
-                                    <figure><a href="activity/{{$item->id}}" title=""><img style="width: 900px; height: 180px;" src="img/{{$img->image_name}}" alt="{{$item->activity_name}}" /></a></figure>
+                                @if($item->images->isNotEmpty())
+                                    <figure>
+                                    <a href="activity/{{$item->id}}" title="">
+                                        <img style="width: 900px; height: 180px;" src="img/{{$item->images[0]->image_name}}" alt="{{$item->activity_name}}" />
+                                    </a>
+                                    </figure>
+                                @else
+                                    <figure>
+                                    <a href="activity/{{$item->id}}" title="">
+                                        <img style="width: 900px; height: 180px;" src="/images/showpacket.jpg" alt="{{$item->activity_name}}" />
+                                    </a>
+                                    </figure>
                                 @endif
-                                @endforeach 
                                 <div class="details" style="height: 245px;">
                                     <?php
                                         $Excellent = $item->reviews->where('score_review', 'Excellent')->count();

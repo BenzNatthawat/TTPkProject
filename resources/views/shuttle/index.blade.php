@@ -45,7 +45,19 @@
                     <div class="static-content index">
                         <div class="row">
                         <h1>shuttle</h1>
-                           
+                        
+                        @if(count($errors)>0)
+                        <div class="alert alert-danger">
+                            <ul class="li-alert">
+                                @foreach($errors->all() as $error)
+                                    <li>
+                                        {{$error}}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+
                     <form id="main-search" method="post" action="/reservation/create/1">
                     <div class="row">
                         
@@ -60,11 +72,11 @@
                                 <div class="row">
                                     <div class="f-item one-half">
                                         <label for="destination7">Pick Up</label>
-                                        <input type="text" placeholder="Where the place that pick up you." id="pick" name="pick_up" required />
+                                        <input type="text" placeholder="Where the place that pick up you." id="pick" name="pick_up" required value="{{old('pick_up')}}" />
                                     </div>
                                     <div class="f-item one-half">
                                         <label for="destination8">Drop Off</label>
-                                        <input type="text" placeholder="Where the place that drop off you." id="Drop" name="drop_off" required />
+                                        <input type="text" placeholder="Where the place that drop off you." id="Drop" name="drop_off" required value="{{old('drop_off')}}" />
                                     </div>
                                 </div>
                             </div>
@@ -98,12 +110,12 @@
                                         <div class="row">
                                             <div class="f-item one-half">
                                                 <div class="datepicker-wrap">
-                                                    <input type="text" placeholder="" id="datepicker1" name="depart_date" required/>
+                                                    <input type="text" placeholder="" id="datepicker1" name="depart_date" required value="{{old('depart_date')}}" />
                                                 </div>
                                             </div>
                                             <div class="f-item one-half">
                                                 <div class="indexpicker">
-                                                    <input id="timepicker1" type="text" name="depart_time" required/>
+                                                    <input id="timepicker1" type="text" name="depart_time" required value="{{old('depart_time')}}" />
                                                 </div>
                                             </div>
                                         </div>
@@ -113,12 +125,12 @@
                                         <div class="row">
                                             <div class="f-item one-half">
                                                 <div class="datepicker-wrap">
-                                                    <input type="text" placeholder="" id="datepicker2" name="return_date" required/>
+                                                    <input type="text" placeholder="" id="datepicker2" name="return_date" required value="{{old('return_date')}}" />
                                                 </div>
                                             </div>
                                             <div class="f-item one-half">
                                                 <div class="indexpicker">
-                                                    <input id="timepicker2" type="text" name="return_time" required/>
+                                                    <input id="timepicker2" type="text" name="return_time" required value="{{old('return_time')}}" />
                                                 </div>
                                             </div>
                                         </div>
@@ -134,16 +146,16 @@
                                     <div class="f-item full-width">
                                         <label for="spinner2">Vehicle Type:</label>
                                         <select name="vehicle_type">
-                                            <option>No Preference</option>
-                                            <option>Van</option>
-                                            <option>Taxi</option>
+                                            <option {{ old('vehicle_type') == 'No Preference' ? 'selected' : '' }}>No Preference</option>
+                                            <option {{ old('vehicle_type') == 'Van' ? 'selected' : '' }}>Van</option>
+                                            <option {{ old('vehicle_type') == 'Taxi' ? 'selected' : '' }}>Taxi</option>
                                         </select>
                                     </div>
                                     <div class="f-item full-width">
                                         <label for="spinner2">One-Way Or Round-Rrip:</label>
                                         <select name="round">
-                                            <option>One-Way</option>
-                                            <option selected>Round-Trip</option>
+                                            <option {{ old('round') == 'One-Way' ? 'selected' : '' }}>One-Way</option>
+                                            <option {{ old('round') == 'Round-Trip' || old('round') == '' ? 'selected' : '' }}>Round-Trip</option>
                                         </select>
                                     </div>
                                 </div>
@@ -155,7 +167,7 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                             <div class="three-fourth">
-                                <input type="submit" value="Proceed to results" class="gradient-button search-submit" id="search-submit" />
+                                <input type="submit" value="Continue" class="gradient-button search-submit" id="search-submit" />
                             </div>
 
                         </div>

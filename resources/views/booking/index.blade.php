@@ -43,7 +43,7 @@
                         </td>
                         <td>
                         <form action="/BookingActivity/{{$book->id}}" method="POST">
-                            <input class="edit-button" type="button" name="" value="Edit">
+                            <a href="/BookingActivity/{{$book->id}}/edit"><input class="edit-button" type="button" name="" value="Edit"></a>
                             <input id="delete-button" type="submit" name="_method" value="DELETE">
                         </td>
                         {{ csrf_field() }}
@@ -63,7 +63,7 @@
                         </td>
                         <td>
                         <form action="/reservation/{{$book->id}}" method="POST">
-                            <input class="edit-button" type="button" name="" value="Edit">
+                            <a href="/reservation/{{$book->id}}/edit"><input class="edit-button" type="button" name="" value="Edit"></a>
                             <input id="delete-button" type="submit" name="_method" value="DELETE">
                         </td>
                         {{ csrf_field() }}
@@ -90,7 +90,7 @@
                         </td>
                         <td>
                         <form action="/BookingPackage/{{$book->id}}" method="POST">
-                            <input class="edit-button" type="button" name="" value="Edit">
+                            <a href="/BookingPackage/{{$book->id}}/edit"><input class="edit-button" type="button" name="" value="Edit"></a>
                             <input id="delete-button" type="submit" name="_method" value="DELETE">
                         </td>
                         {{ csrf_field() }}
@@ -130,10 +130,10 @@
                         <td>{{$book->first_name}} {{$book->last_name}}</td>
                         <td>{{$book->created_at}}</td>
                         <td>{{$book->booking_status}}</td>
-                        <form action="/statusbooking/{{$book->id}}" method="post" enctype="multipart/form-data">
+                        <form action="/reservation/{{$book->id}}" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <td>
-                                <input type="submit" name="" value="Confirm">
+                                <a href="/statusbooking/{{$book->id}}"><input class="gradient-button" type="button" value="Confirm"></a>
                                 <input id="delete-button" type="submit" name="_method" value="DELETE">
                             </td>
                         </form>
@@ -160,10 +160,10 @@
                         <td>{{$book->first_name}} {{$book->last_name}}</td>
                         <td>{{$book->created_at}}</td>
                         <td>{{$book->booking_status}}</td>
-                        <form action="/statusbooking/{{$book->id}}" method="post" enctype="multipart/form-data">
+                        <form action="/BookingActivity/{{$book->id}}" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <td>
-                                <input type="submit" name="" value="Confirm">
+                                <a href="/statusbooking/{{$book->id}}"><input class="gradient-button" type="button" value="Confirm"></a>
                                 <input id="delete-button" type="submit" name="_method" value="DELETE">
                             </td>
                         </form>
@@ -190,10 +190,10 @@
                         <td>{{$book->first_name}} {{$book->last_name}}</td>
                         <td>{{$book->created_at}}</td>
                         <td>{{$book->booking_status}}</td>
-                        <form action="/statusbooking/{{$book->id}}" method="post" enctype="multipart/form-data">
+                        <form action="/BookingPackage/{{$book->id}}" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <td>
-                                <input type="submit" name="" value="Confirm">
+                                <a href="/statusbooking/{{$book->id}}"><input class="gradient-button" type="button" value="Confirm"></a>
                                 <input id="delete-button" type="submit" name="_method" value="DELETE">
                             </td>
                         </form>

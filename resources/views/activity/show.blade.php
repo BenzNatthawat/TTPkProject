@@ -8,7 +8,6 @@
 		<div class="wrap">			
 			<div class="row">
 
-				<!--hotel three-fourth content-->
 				<section class="their-fourth">
 					<!--gallery-->
 					<div class="gallery" style="margin: 0px 10px 0px 10px">
@@ -17,11 +16,11 @@
 							<ul id="image-gallery" class="lightSlider lsGrab lSSlide" style="transform: translate3d(-872.5px, 0px, 0px); padding-bottom: 0%;">
 								@foreach( $activities->images as $index => $img)
 								@if($index == 1)
-								<li data-thumb="images/uploads/hotel4.jpg" class="lslide active"> 
+								<li data-thumb="#" class="lslide active"> 
 									<img src="../img/{{$img->image_name}}" style="width: 100%; height: 30em">
 								</li>
 								@else
-								<li data-thumb="images/uploads/hotel1.jpg" class="lslide"> 
+								<li data-thumb="#" class="lslide"> 
 									<img src="../img/{{$img->image_name}}" style="width: 100%; height: 30em">
 								</li>
 								@endif
@@ -31,7 +30,8 @@
 					</div>
 					<!--//gallery-->
 				</section>
-					<!--sidebar-->
+				<!--sidebar-->
+				
 				<aside class="one-fourth right-sidebar">
 					<!--hotel details-->
 					<article class="hotel-details">

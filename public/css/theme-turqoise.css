@@ -35,7 +35,7 @@ ul > li:before,.booking,.create h2 span
     background: linear-gradient(to bottom, #8f2626 0%,#c85f5f 100%);
 }
 
-.edit-button
+.edit-button,#edit-button
 {
     background: #5fc864;
     background: -moz-linear-gradient(top, #5fc864 0%, #268f2d 100%);

@@ -23,12 +23,12 @@ Route::get('/createAandP', 'HomeController@createAandP');
 Route::resource('/activity','ActivityController');
 Route::post('/searchformA','ActivityController@searchform');
 
-Route::resource('/packet','PackageController');
-Route::post('/searchformP','PackageController@searchform');
+Route::resource('/packet','PacketController');
+Route::post('/searchformP','PacketController@searchform');
 
 Route::get('/booking','BookingAtivityController@index');
 Route::get('/confirmpayment/{id}','BookingAtivityController@confirmpayment');
-Route::post('/statusbooking/{id}','BookingAtivityController@statusbooking');
+Route::get('/statusbooking/{id}','BookingAtivityController@statusbooking');
 
 Route::resource('/BookingActivity','BookingAtivityController');
 Route::get('/BookingActivity/{id_activity}/create/{id_book}','BookingAtivityController@create');
@@ -45,7 +45,7 @@ Route::get('/reservation/create/{id_book}','ReservationController@create');
 Route::post('/reservation/create/{id_book}','ReservationController@create');
 
 Route::post('activity/postreview/{id_activity}','ActivityController@postreview');
-Route::post('packet/postreview/{id_packet}','PackageController@postreview');
+Route::post('packet/postreview/{id_packet}','PacketController@postreview');
 
 Route::get('/positions','BookingAtivityController@position');
 Auth::routes();
